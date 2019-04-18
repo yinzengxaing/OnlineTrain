@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+          "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssm.train.dao.UserManageMapper">
+<!-- 查询所有职员 -->
+<select id="selectAllUser" resultType="java.util.Map" parameterType="java.util.Map">
+	SELECT 
+	id,
+	user,
+	username,
+	sex,
+	depid,
+	telephonenumber
+	FROM user 
+	WHERE 
+	role = 0
+</select>
+<!-- 查询所有管理员 -->
+<select id="selectAllAdministrator" resultType="java.util.Map" parameterType="java.util.Map">
+	SELECT * FROM user WHERE role = 1;
+</select>
+<!-- 批量添加职员信息 -->
+<insert id="insertAllUser" parameterType="java.util.List">
+	INSERT INTO user(
+	user,
+	password
+	)
+	VALUES
+	<foreach collection ="list" item="item" index= "index" separator =",">
+	(
+	#{item.user},
+	#{item.password}
+	)
+	</foreach>
+</insert>
+<!-- 添加管理员信息 -->
+<insert id="insertAdministrator" parameterType="java.util.List">
+	INSERT INTO user(
+	user,
+	password,
+	role
+	)
+	VALUES
+	(
+	#{user},
+	#{password},
+	#{role}
+	)
+</insert>
+<!-- 修改用户信息及密码 -->
+<update id="updateUserInfo" parameterType="java.util.Map">
+	UPDATE user
+	<set>
+	<if test="password !='' and password != null">
+	password=#{password},
+	</if>
+	<if test="sex !='' and sex != null">
+	sex=#{sex},
+	</if>
+	<if test="depid !='' and depid != null">
+	depid=#{depid},
+	</if>
+	<if test="telephonenumber !='' and telephonenumber != null">
+	telephonenumber=#{telephonenumber},
+	</if>
+	<if test="username !='' and username != null">
+	username=#{username},
+	</if>
+	<if test="role !='' and role != null">
+	role=#{role},
+	</if>
+	</set>
+	WHERE
+	user = #{user}
+</update> 
+<!-- 修改账号范围的开始 -->
+<update id="updateUserStart" parameterType="java.util.Map">
+	UPDATE userstart
+	set
+	userstart=#{userstart}
+	WHERE
+	id = 1
+</update> 
+<!-- 查询账号开始的值 -->
+<select id="selectUserStart" resultType="java.util.Map" parameterType="java.util.Map">
+	SELECT userstart FROM userstart WHERE id = 1
+</select>
+
+
+</mapper>

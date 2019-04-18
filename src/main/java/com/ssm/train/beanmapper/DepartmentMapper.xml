@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+          "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssm.train.dao.DepartmentMapper">
+<!-- 查询部门列表-->
+<select id="getDepartmentList" resultType="java.util.Map" parameterType="java.util.Map">
+	SELECT
+	id,
+	departname,
+	createTime,
+	updateTime
+FROM
+	department
+</select>
+<!-- 添加部门 -->
+<insert id="insertDepartment" parameterType="java.util.List">
+	INSERT INTO department(
+	departname,
+	createTime,
+	updateTime
+	)
+	VALUES
+	(
+	#{departname},
+	#{createTime},
+	#{updateTime}
+	)
+</insert>
+<!-- 修改部门信息 -->
+<update id="updateDepartment" parameterType="java.util.Map">
+	UPDATE department
+	set
+	departname=#{departname},
+	updateTime=#{updateTime},
+	WHERE
+	id = #{id}
+</update> 
+</mapper>
