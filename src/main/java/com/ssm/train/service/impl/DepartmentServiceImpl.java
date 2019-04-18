@@ -32,6 +32,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 		List<Map<String,Object>> departmentList = departmentMapper.getDepartmentList(params, new PageBounds(page, limit));
 		PageList<Map<String, Object>> abilityInfoPageList = (PageList<Map<String, Object>>) departmentList;
 		int total = abilityInfoPageList.getPaginator().getTotalCount();
+		System.out.println("xr");
 		outputObject.setBeans(departmentList);
 		outputObject.settotal(total); 
 	}
