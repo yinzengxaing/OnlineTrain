@@ -15,7 +15,7 @@ function eventInit(){
 	});
 	//查询按钮点击事件
 	$('body').on('click', '#btn_query',function(e){
-		$('#massage').bootstrapTable('refresh',{url:path+'/post/UserManageController/selectAllUser'});
+		$('#massage').bootstrapTable('refresh',{url:path+'/post/UserManageController/selectUserByName'});
 	});
 }
 var TableInit = function (){
@@ -78,7 +78,7 @@ var TableInit = function (){
         	  		return '<a style="word-wrap:break-word;">'+value+'</a>';
         	  	}
 			},{
-				field :'depid',
+				field :'departname',
 				title: '部门',
 				align: 'center',
         	  	width: '100',
@@ -115,7 +115,7 @@ var TableInit = function (){
 		var temp={
 				limit: params.limit,   // 页面大小
 				offset: params.offset,  // 页码
-				proPacTypeName:$('#queryPacTypeName').val()
+				username:$('#username').val()
 		};
 		return temp;
 	};
@@ -125,16 +125,16 @@ var TableInit = function (){
 //操作按钮点击事件
 window.EvenInit = {
 		'click .RoleOfA': function (e, value, row, index) { // 删除一个分类
-				qiao.bs.confirm("确定删除该用户么？",function(){
+				qiao.bs.confirm("确定将该用户设置为管理员吗？",function(){
 					var params = {
 							id : row.id,
 					};
-					AjaxPostUtil.request({url:path+"/post/UserManageController/selectAllUser",params:params,type:'json',callback:function(json){
+					AjaxPostUtil.request({url:path+"/post/UserManageController/updateUserToAdministrator",params:params,type:'json',callback:function(json){
 					if (json.returnCode == 0){
-						qiao.bs.msg({msg:"删除成功！",type:'success'});
+						qiao.bs.msg({msg:"设置成功！",type:'success'});
 						setTimeout(refreshTable,500);//半秒后刷新页面
 					}else{
-						qiao.bs.msg({msg:"删除失败！",type:'danger'});
+						qiao.bs.msg({msg:"设置失败！",type:'danger'});
 					}
 					}
 					});
@@ -144,16 +144,19 @@ window.EvenInit = {
 				location.href = "updateProPacType.html?id="+row.id;
 			},
 			'click .RoleOfC': function (e, value, row, index) { //查看一个商品类别
-				$('#myModal2').modal('show');
+				$('#myModa-add').modal('show');
 				var params = {
 						id:row.id
 				};
-				AjaxPostUtil.request({url:path+"/post/WechatProPacTypeController/getPacTypeById",params:params,type:'json',callback:function(json){
+				AjaxPostUtil.request({url:path+"/post/UserManageController/selectUserById",params:params,type:'json',callback:function(json){
 					if (json.returnCode == 0){
-						$('#proPacTypeName').html(json.bean.proPacTypeName);
-						$('#proPacTypeDesc').html(json.bean.proPacTypeDesc);
-						$('#createId').html(json.bean.adminNo);
+						$('#user').html(json.bean.user);
+						$('#nameUser').html(json.bean.username);
+						$('#sex').html(json.bean.sex);
+						$('#departname').html(json.bean.departname);
+						$('#telephonenumber').html(json.bean.telephonenumber);
 						$('#createTime').html(json.bean.createTime);
+						$('#updateTime').html(json.bean.updateTime);
 					}else{
 						qiao.bs.msg({msg:json.returnMessage,type:'danger'});
 					}
@@ -162,9 +165,8 @@ window.EvenInit = {
 		};
 function operateFormatter(value, row, index) {
 		return [
-		        '<button type="button" class="RoleOfC btn btn-default  btn-sm" style="margin-right:15px;">详情</button>',
-		        '<button type="button" class="RoleOfB btn btn-default  btn-sm" style="margin-right:15px;">编辑</button>',
-		        '<button type="button" class="RoleOfA btn btn-default  btn-sm" style="margin-right:15px;">删除</button>'
+				'<button type="button" class="RoleOfC btn btn-default  btn-sm" style="margin-right:15px;">详情</button>',
+		        '<button type="button" class="RoleOfA btn btn-default  btn-sm" style="margin-right:15px;">设为管理员</button>'
 		        ].join('');
 };
 //刷新表格

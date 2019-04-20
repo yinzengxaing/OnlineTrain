@@ -20,7 +20,7 @@
                     <div class="form-group" style="margin-top:15px">
                         <label class="control-label col-sm-1" for="txt_search_departmentname">用户名称</label>
                         <div class="col-sm-3">
-                            <input type="text" class="form-control" id="txt_search_departmentname">
+                            <input type="text" class="form-control" id="username">
                         </div>
                         <div class="col-sm-4" style="text-align:left;">
                             <button type="button" style="margin-left:50px" id="btn_query" class="btn btn-primary">查询</button>
@@ -32,7 +32,7 @@
 
         <div id="toolbar" class="btn-group">
             <button id="btn_add" type="button" class="btn btn-default">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>批量添加
             </button>
         </div>
         <table id="massage"></table>
@@ -43,32 +43,36 @@
 			<div class="modal-content">
 			    <div class="modal-header">
 			    	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
-			    	<h4 class="modal-title" id="myModalLabel1">分类详情</h4>
+			    	<h4 class="modal-title" id="myModalLabel1">职员详情</h4>
 				</div>
 				<div class="modal-body dialog-body">
 					<div class="form-group dialog-50">
-			    		<label for="txt_departmentname" class="dialog-label-20" >分类名称：</label>
-			    		<div class="dialog-div-75">
-			    			<font id="proPacTypeName"></font>
-			    		</div>
+			    		<label for="txt_departmentname" class="dialog-label-20" >账号：</label>		 
+			    			<font id="user"></font>
+			    	</div>
+			    	<div class="form-group dialog-100">
+			    		<label for="txt_departmentname" class="dialog-label-10" >姓名：</label>
+			    			<font id="nameUser"></font>
 			    	</div>
 			    	<div class="form-group dialog-50">
-			    		<label for="txt_departmentname" class="dialog-label-20" >创建人：</label>
-			    		<div class="dialog-div-75">
-			    			<font id="createId"></font>
-			    		</div>
+			    		<label for="txt_departmentname" class="dialog-label-20" >性别：</label>
+			    			<font id="sex"></font>
 			    	</div>
 					<div class="form-group dialog-50">
-			    		<label for="txt_departmentname" class="dialog-label-20" >创建时间：</label>
-			    		<div class="dialog-div-75">
-			    			<font id="createTime"></font>
-			    		</div>
+			    		<label for="txt_departmentname" class="dialog-label-20" >部门：</label>
+			    			<font id="departname"></font>
 			    	</div>
 					<div class="form-group dialog-100">
-			    		<label for="txt_departmentname" class="dialog-label-10" >分类描述：</label>
-			    		<div class="dialog-div-80">
-			    			<font id="proPacTypeDesc"></font>
-			    		</div>
+			    		<label for="txt_departmentname" class="dialog-label-10" >联系方式：</label>
+			    			<font id="telephonenumber"></font>
+			    	</div>
+			    	<div class="form-group dialog-100">
+			    		<label for="txt_departmentname" class="dialog-label-10" >创建时间：</label>
+			    			<font id="createTime"></font>
+			    	</div>
+			    	<div class="form-group dialog-100">
+			    		<label for="txt_departmentname" class="dialog-label-10" >修改时间：</label>
+			    			<font id="updateTime"></font>
 			    	</div>
 				</div>
 			    <div class="modal-footer">

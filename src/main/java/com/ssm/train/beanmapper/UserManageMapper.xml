@@ -5,19 +5,69 @@
 <!-- 查询所有职员 -->
 <select id="selectAllUser" resultType="java.util.Map" parameterType="java.util.Map">
 	SELECT 
-	id,
-	user,
-	username,
-	sex,
-	depid,
-	telephonenumber
-	FROM user 
+	user.id,
+	user.user,
+	user.username,
+	user.sex,
+	department.departname,
+	user.telephonenumber
+	FROM user,department 
 	WHERE 
-	role = 0
+	user.depid=department.id AND user.role=0;
+</select>
+<select id="selectUserById" resultType="java.util.Map" parameterType="java.util.Map">
+	SELECT 
+	user.id,
+	user.user,
+	user.username,
+	user.sex,
+	user.username,
+	user.createTime,
+	user.updateTime,
+	department.departname,
+	user.telephonenumber
+	FROM user,department 
+	WHERE 
+	user.depid=department.id AND user.id=#{id};
+</select>
+<!-- 按姓名模糊查询职员 -->
+<select id="selectUserByName" resultType="java.util.Map" parameterType="java.util.Map">
+	SELECT 
+	user.id,
+	user.user,
+	user.username,
+	user.sex,
+	department.departname,
+	user.telephonenumber
+	FROM user,department 
+	WHERE 
+	user.depid=department.id AND user.role=0 AND user.username like '%${username}%';
+</select>
+<!-- 按姓名模糊查询管理员 -->
+<select id="selectAdministratorByName" resultType="java.util.Map" parameterType="java.util.Map">
+	SELECT 
+	user.id,
+	user.user,
+	user.username,
+	user.sex,
+	department.departname,
+	user.telephonenumber
+	FROM user,department 
+	WHERE 
+	user.depid=department.id AND user.role=1 AND user.username like '%${username}%';
 </select>
 <!-- 查询所有管理员 -->
 <select id="selectAllAdministrator" resultType="java.util.Map" parameterType="java.util.Map">
-	SELECT * FROM user WHERE role = 1;
+	SELECT 
+	user.id,
+	user.user,
+	user.username,
+	user.sex,
+	department.departname,
+	user.telephonenumber
+	FROM user,department 
+	WHERE 
+	user.depid=department.id AND user.role=1;
 </select>
 <!-- 批量添加职员信息 -->
 <insert id="insertAllUser" parameterType="java.util.List">
@@ -85,6 +135,22 @@
 <select id="selectUserStart" resultType="java.util.Map" parameterType="java.util.Map">
 	SELECT userstart FROM userstart WHERE id = 1
 </select>
-
+<!-- 删除部门 -->
+<delete id="deleteUserById" parameterType="java.util.Map">
+		DELETE
+		FROM
+			user
+		WHERE
+			id = #{id};
+</delete>
+<!-- 将该用户设置为管理员 -->
+<update id="updateUserToAdministrator" parameterType="java.util.Map">
+	UPDATE user
+	set
+	updateTime=#{updateTime},
+	role=1
+	WHERE
+	id = #{id}
+</update> 
 
 </mapper>

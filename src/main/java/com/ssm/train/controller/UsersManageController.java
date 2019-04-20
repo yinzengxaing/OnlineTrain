@@ -56,6 +56,46 @@ public class UsersManageController {
 	public void selectUserStart(InputObject inputObject,OutputObject outputObject) throws Exception {
 		userManageService.selectUserStart(inputObject, outputObject);
 	}
+	@RequestMapping( "/post/UserManageController/deleteUserById")
+	@ResponseBody
+	//删除账号
+	public void deleteUserById(InputObject inputObject,OutputObject outputObject) throws Exception {
+		userManageService.deleteUserById(inputObject, outputObject);
+	}
+	
+	@RequestMapping( "/post/UserManageController/selectUserByName")
+	@ResponseBody
+	//按用户名查找职员
+	public void selectUserByName(InputObject inputObject,OutputObject outputObject) throws Exception {
+		userManageService.selectUserByName(inputObject, outputObject);
+	}
+	
+	@RequestMapping( "/post/UserManageController/selectAdministratorByName")
+	@ResponseBody
+	//按用户名查找管理员
+	public void selectAdministratorByName(InputObject inputObject,OutputObject outputObject) throws Exception {
+		userManageService.selectAdministratorByName(inputObject, outputObject);
+	}
+	
+	@RequestMapping( "/post/UserManageController/updateUserToAdministrator")
+	@ResponseBody
+	//设为管理员
+	public void updateUserToAdministrator(InputObject inputObject,OutputObject outputObject) throws Exception {
+		userManageService.updateUserToAdministrator(inputObject, outputObject);
+	}
+	
+	@RequestMapping( "/post/UserManageController/selectUserById")
+	@ResponseBody
+	//设为管理员
+	public void selectUserById(InputObject inputObject,OutputObject outputObject) throws Exception {
+		userManageService.selectUserById(inputObject, outputObject);
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 }

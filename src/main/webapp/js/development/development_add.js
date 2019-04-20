@@ -32,12 +32,12 @@ function eventInit(){
 	}).on('success.form.bv', function(e) {
 			//设置参数
 			var params  = {
-					developmentName : $('#developmentName').val(),
+					departname : $('#developmentName').val(),
 			};
 			//进行部门的添加
-			AjaxPostUtil.request({url:path+"",params:params,type:'json',callback:function(json){
+			AjaxPostUtil.request({url:path+"/post/DepartmentController/insertDepartment",params:params,type:'json',callback:function(json){
 				if(json.returnCode == 0){
-					location.href = "pdevelopment_list.html";
+					location.href = "development_list.html";
 				}else{
 					$("#saveMenu").removeAttr("disabled");
 					qiao.bs.msg({msg:json.returnMessage,type:'danger'});

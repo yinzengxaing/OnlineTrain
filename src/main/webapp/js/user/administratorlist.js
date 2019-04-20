@@ -10,11 +10,12 @@ function dataInit(){
 function eventInit(){
 	//添加按钮点击事件
 	$('body').on('click', '#btn_add', function(e){
-		location.href = "development_add.html;"
+		
+		$('#myModa-add').modal('show')
 	});
 	//查询按钮点击事件
 	$('body').on('click', '#btn_query',function(e){
-		$('#massage').bootstrapTable('refresh',{url:path+'/post/DepartmentController/getDepartmentByName'});
+		$('#massage').bootstrapTable('refresh',{url:path+'/post/UserManageController/selectAdministratorByName'});
 	});
 }
 var TableInit = function (){
@@ -22,7 +23,7 @@ var TableInit = function (){
 	//初始化Table
 	oTableInit.Init = function () {
 		$('#massage').bootstrapTable({
-			url: path+'/post/DepartmentController/getDepartmentList',             //请求后台的URL（*） 
+			url: path+'/post/UserManageController/selectAllAdministrator',             //请求后台的URL（*） 
 			method: 'post',                     //请求方式（*）
 			toolbar: '#toolbar',                //工具按钮用哪个容器
 			striped: true,                      //是否显示行间隔色
@@ -53,42 +54,50 @@ var TableInit = function (){
 					return index+1;
 				}
 			}, {
-				field: 'departname',
-				title: '部门',
+				field: 'user',
+				title: '账号',
 				align: 'center',
 				width: '150',
 				formatter: function (value, row, index) {
 					return '<a style="word-wrap:break-word;">'+value+'</a>';
 				}
 			},{
-				field: 'createTime',
-				title: '创建时间',
+				field: 'username',
+				title: '姓名',
 				align: 'center',
 				width: '200',
 				formatter: function (value, row, index) {
-					if (isNull(value)){
-						return '<a style="word-wrap:break-word;">'+"无"+'</a>';
-					}else{
-						if (value.length>30){
-							//截取字符串前30个字
-							return '<a style="word-wrap:break-word;">'+value+"..."+'</a>';	
-						}else{
-							return '<a style="word-wrap:break-word;">'+value+'</a>';	
-						}
-					}  
+					return '<a style="word-wrap:break-word;">'+value+'</a>';
 				}
 			},{
-				field :'updateTime',
-				title: '修改时间',
+				field :'sex',
+				title: '性别',
 				align: 'center',
-        	  	width: '200',
+        	  	width: '100',
         	  	formatter: function (value, row, index){
+        	  		return '<a style="word-wrap:break-word;">'+value+'</a>';
+        	  	}
+			},{
+				field :'departname',
+				title: '部门',
+				align: 'center',
+        	  	width: '100',
+        	  	formatter: function (value, row, index){
+        	  		return '<a style="word-wrap:break-word;">'+value+'</a>';
+        	  	}
+			},{
+				field: 'telephonenumber',
+	            title: '联系方式',
+	            width: '300',
+	            align: 'center',
+	            events: EvenInit,
+	            formatter: function (value, row, index){
         	  		return '<a style="word-wrap:break-word;">'+value+'</a>';
         	  	}
 			},{
 				field: 'operate',
 	            title: '操作',
-	            width: '200',
+	            width: '300',
 	            align: 'center',
 	            events: EvenInit,
 	            formatter: operateFormatter
@@ -106,8 +115,8 @@ var TableInit = function (){
 		var temp={
 				limit: params.limit,   // 页面大小
 				offset: params.offset,  // 页码
-				departname:$('#departmentName').val()
-		};	
+				username:$('#username').val()
+		};
 		return temp;
 	};
 	return oTableInit;
@@ -116,33 +125,38 @@ var TableInit = function (){
 //操作按钮点击事件
 window.EvenInit = {
 		'click .RoleOfA': function (e, value, row, index) { // 删除一个分类
-				qiao.bs.confirm("确定删除该用户么？",function(){
+				qiao.bs.confirm("确定将该用户设置为管理员吗？",function(){
 					var params = {
 							id : row.id,
 					};
-					AjaxPostUtil.request({url:path+"/post/DepartmentController/deleteDepartment",params:params,type:'json',callback:function(json){
+					AjaxPostUtil.request({url:path+"/post/UserManageController/updateUserToAdministrator",params:params,type:'json',callback:function(json){
 					if (json.returnCode == 0){
-						qiao.bs.msg({msg:"删除成功！",type:'success'});
+						qiao.bs.msg({msg:"设置成功！",type:'success'});
 						setTimeout(refreshTable,500);//半秒后刷新页面
 					}else{
-						qiao.bs.msg({msg:"删除失败！",type:'danger'});
+						qiao.bs.msg({msg:"设置失败！",type:'danger'});
 					}
 					}
 					});
 				},function(){});
 			},
 			'click .RoleOfB': function (e, value, row, index) { //编辑一个商品类别
-				location.href = "development_update.html?developmentId="+row.id;
+				location.href = "updateProPacType.html?id="+row.id;
 			},
 			'click .RoleOfC': function (e, value, row, index) { //查看一个商品类别
-				$('#myModal').modal('show');
+				$('#myModa-add').modal('show');
 				var params = {
 						id:row.id
 				};
-				AjaxPostUtil.request({url:path+"",params:params,type:'json',callback:function(json){
+				AjaxPostUtil.request({url:path+"/post/UserManageController/selectUserById",params:params,type:'json',callback:function(json){
 					if (json.returnCode == 0){
-						$('#proPacTypeName').html(json.bean.proPacTypeName);
-						$('#proPacTypeDesc').html(json.bean.proPacTypeDesc);
+						$('#user').html(json.bean.user);
+						$('#nameUser').html(json.bean.username);
+						$('#sex').html(json.bean.sex);
+						$('#departname').html(json.bean.departname);
+						$('#telephonenumber').html(json.bean.telephonenumber);
+						$('#createTime').html(json.bean.createTime);
+						$('#updateTime').html(json.bean.updateTime);
 					}else{
 						qiao.bs.msg({msg:json.returnMessage,type:'danger'});
 					}
@@ -151,13 +165,12 @@ window.EvenInit = {
 		};
 function operateFormatter(value, row, index) {
 		return [
-		        '<button type="button" class="RoleOfB btn btn-default  btn-sm" style="margin-right:15px;">编辑</button>',
-		        '<button type="button" class="RoleOfA btn btn-default  btn-sm" style="margin-right:15px;">删除</button>'
+		        '<button type="button" class="RoleOfC btn btn-default  btn-sm" style="margin-right:15px;">详情</button>'
 		        ].join('');
 };
 //刷新表格
 function refreshTable(){
-	$('#massage').bootstrapTable('refresh',{url:path+'/post/DepartmentController/getDepartmentList'});
+	$('#massage').bootstrapTable('refresh',{url:path+'/post/UserManageController/selectAllUser'});
 }
 
 

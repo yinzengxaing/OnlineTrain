@@ -12,6 +12,18 @@
 FROM
 	department
 </select>
+<!-- 部门名称模糊查询 -->
+<select id="getDepartmentByName" resultType="java.util.Map" parameterType="java.util.Map">
+	SELECT
+	id,
+	departname,
+	createTime,
+	updateTime
+FROM
+	department
+WHERE
+   departname like '%${departname}%'
+</select>
 <!-- 添加部门 -->
 <insert id="insertDepartment" parameterType="java.util.List">
 	INSERT INTO department(
@@ -31,8 +43,28 @@ FROM
 	UPDATE department
 	set
 	departname=#{departname},
-	updateTime=#{updateTime},
+	updateTime=#{updateTime}
 	WHERE
-	id = #{id}
+	id = #{id};
 </update> 
+<!-- 查询该部门是否存在-->
+<select id="getDepartment" resultType="java.util.Map" parameterType="java.util.Map">
+	SELECT
+	id,
+	departname,
+	createTime,
+	updateTime
+FROM
+	department
+WHERE
+    departname=#{departname}
+</select>
+<!-- 删除部门 -->
+<delete id="deleteDepartment" parameterType="java.util.Map">
+		DELETE
+		FROM
+			department
+		WHERE
+			id = #{id};
+</delete>
 </mapper>
