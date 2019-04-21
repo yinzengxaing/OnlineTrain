@@ -1,3 +1,4 @@
+var userstart="";
 $(function(e){
 	dataInit();
 });
@@ -10,12 +11,38 @@ function dataInit(){
 function eventInit(){
 	//添加按钮点击事件
 	$('body').on('click', '#btn_add', function(e){
-		
-		$('#myModa-add').modal('show')
+		$('#myModaadd').modal('show');
+		AjaxPostUtil.request({url:path+"/post/UserManageController/selectUserStart",params:"",type:'json',callback:function(json){
+			if (json.returnCode == 0){
+				$('#userstart').html(json.bean.userstart);
+				userstart=json.bean.userstart;
+			}else{
+				qiao.bs.msg({msg:json.returnMessage,type:'danger'});
+			}
+		}});
 	});
 	//查询按钮点击事件
 	$('body').on('click', '#btn_query',function(e){
 		$('#massage').bootstrapTable('refresh',{url:path+'/post/UserManageController/selectUserByName'});
+	});
+	//取消按钮相应事件
+	$('body').on('click', '#cancleBean', function(e){
+		location.href = "userlist.html";
+	});
+	//提交按钮相应事件
+	$('body').on('click', '#saveNumber', function(e){
+		var params = {
+				number:$('#addNumber').find("option:selected").attr("tag"),
+				userstart:userstart
+		};
+		AjaxPostUtil.request({url:path+"/post/UserManageController/insertAllUser",params:params,type:'json',callback:function(json){
+			if (json.returnCode == 0){
+				location.href = "userlist.html";
+			}else{
+				
+				qiao.bs.msg({msg:json.returnMessage,type:'danger'});
+			}
+		}});
 	});
 }
 var TableInit = function (){
@@ -172,6 +199,10 @@ function operateFormatter(value, row, index) {
 //刷新表格
 function refreshTable(){
 	$('#massage').bootstrapTable('refresh',{url:path+'/post/UserManageController/selectAllUser'});
+}
+//下拉框触发事件
+function gradeChange(){
+	$("#saveMenu").removeAttr("disabled");
 }
 
 

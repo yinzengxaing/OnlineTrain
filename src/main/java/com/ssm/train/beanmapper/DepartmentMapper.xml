@@ -11,6 +11,8 @@
 	updateTime
 FROM
 	department
+WHERE
+    id != 7; 
 </select>
 <!-- 部门名称模糊查询 -->
 <select id="getDepartmentByName" resultType="java.util.Map" parameterType="java.util.Map">
@@ -22,7 +24,7 @@ FROM
 FROM
 	department
 WHERE
-   departname like '%${departname}%'
+   departname like '%${departname}%' AND id != 7 
 </select>
 <!-- 添加部门 -->
 <insert id="insertDepartment" parameterType="java.util.List">

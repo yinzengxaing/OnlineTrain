@@ -73,13 +73,21 @@
 <insert id="insertAllUser" parameterType="java.util.List">
 	INSERT INTO user(
 	user,
-	password
+	password,
+	createTime,
+	updateTime,
+	depid,
+	role
 	)
 	VALUES
 	<foreach collection ="list" item="item" index= "index" separator =",">
 	(
 	#{item.user},
-	#{item.password}
+	#{item.password},
+	#{item.createTime},
+	#{item.updateTime},
+	7,
+	0
 	)
 	</foreach>
 </insert>

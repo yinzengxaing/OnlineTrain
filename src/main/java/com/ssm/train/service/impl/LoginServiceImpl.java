@@ -24,12 +24,9 @@ public class LoginServiceImpl implements LoginService {
 	private LoginMapper loginmapper;
 	@Override
 	public void loginByUserid(InputObject inputObject, OutputObject outputObject) throws Exception {
-//		Map<String,Object> user = usermapper.selectUser();
-//		outputObject.setBean(user);
-//		System.out.println(user);
 		Map<String,Object> map = inputObject.getParams();
 		//将密码加密后，与数据库有加密密码进行对比
-		//map.put("password", ToolUtil.MD5(map.get("password").toString()));
+		map.put("password", ToolUtil.MD5(map.get("password").toString()));
 		if(JudgeUtil.isNull(map.get("user").toString())){
 			outputObject.setreturnMessage("用户名不能为空");
 			return;
@@ -39,6 +36,7 @@ public class LoginServiceImpl implements LoginService {
 			return;
 		}
 		Map<String,Object> user = loginmapper.selectUser(map);
+		outputObject.setBean(user);
 		if(user == null){
 			outputObject.setreturnMessage("该用户不存在");
 			return;
@@ -46,7 +44,6 @@ public class LoginServiceImpl implements LoginService {
 		else{
 			if(!map.get("password").toString().equals(user.get("password").toString())){
 				outputObject.setreturnMessage("密码错误，请重新输入");
-				outputObject.setBean(user);
 				return;
 			}
 		}

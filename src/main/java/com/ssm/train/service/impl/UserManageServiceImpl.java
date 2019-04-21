@@ -37,8 +37,7 @@ public class UserManageServiceImpl implements UserManageService {
 		System.out.println(userList.toString());
 		outputObject.setBeans(userList);
 		outputObject.settotal(total); 
-		
-
+		System.out.println(inputObject.getLogParams());
 	}
 	//查找所有管理员信息
 	@Override
@@ -60,43 +59,31 @@ public class UserManageServiceImpl implements UserManageService {
 	@Override
 	public void insertAllUser(InputObject inputObject, OutputObject outputObject) throws Exception {
 			Map<String,Object> map = inputObject.getParams();
-			String startUser = map.get("startUser").toString();
-			String endUser = map.get("endUser").toString();
-//			String startUser = "541507010100";
-//			String endUser = "541507010155";
-			int length = startUser.length();
-			//找的user开始不同的位置
-			int i=0;
-			for(i=0;i<length;i++){
-				if(startUser.charAt(i) != endUser.charAt(i))
-					break;
-			}
-			String start = startUser.substring(i);
-			String end = endUser.substring(i);
-			String sameString = startUser.substring(0, i);
-			//将其变成int数字
-			int startNumber = Integer.parseInt(start);
-			int endNumber = Integer.parseInt(end);
-			List<Map<String,Object>> beans = new ArrayList<Map<String,Object>>();
-			//依次生成从startUser开始到endUser的用户
-			for(;startNumber<=endNumber;startNumber++){
-				Map<String,Object> bean = new HashMap<String,Object>();
-				if(startNumber<10){
-					bean.put("user", sameString+"0"+String.valueOf(startNumber));
-					bean.put("password", ToolUtil.MD5((sameString+"0"+String.valueOf(startNumber)).substring(6)));
-				}
-				else
-				{
-					bean.put("user", sameString+String.valueOf(startNumber));
-					bean.put("password", (sameString+String.valueOf(startNumber)).substring(6));
-				}
-				bean.put("createTime", ToolUtil.getTimeAndToString().substring(0, 10));
+			String userstart = map.get("userstart").toString();
+            int number = Integer.parseInt(map.get("number").toString());
+            String userNumber = userstart.substring(0, 10);
+            int startNumer = Integer.parseInt(userstart.substring(10));
+            List<Map<String,Object>> beans = new ArrayList<Map<String,Object>>();
+            //从起始账号开始依次生成账号
+            int i = 0;
+            for(i = startNumer;i<startNumer+number;i++){
+            	Map<String,Object> bean = new HashMap<String,Object>();
+            	if(i<10){
+            		bean.put("user", userNumber+"0"+i);
+            		bean.put("password", ToolUtil.MD5((userNumber+"0"+i).substring(6)));  
+            	}
+            	else{
+            		bean.put("user", userNumber+i);
+            		bean.put("password", ToolUtil.MD5((userNumber+i).substring(6)));  
+            	}
+            	bean.put("createTime", ToolUtil.getTimeAndToString().substring(0, 10));
 				bean.put("updateTime", ToolUtil.getTimeAndToString().substring(0, 10));
 	            beans.add(bean);
-			}
+            	
+            }
 			Map<String,Object> mapbean = new HashMap<String,Object>();
-			mapbean.put("userstart",sameString+String.valueOf(startNumber));
-			userManageMapper.updateUserStart(map);//修改用户账号起始值
+			mapbean.put("userstart",userNumber+i);
+			userManageMapper.updateUserStart(mapbean);//修改用户账号起始值
 			userManageMapper.insertAllUser(beans);			
 			
 	}

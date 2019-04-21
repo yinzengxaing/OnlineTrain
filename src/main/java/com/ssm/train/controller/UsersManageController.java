@@ -86,7 +86,7 @@ public class UsersManageController {
 	
 	@RequestMapping( "/post/UserManageController/selectUserById")
 	@ResponseBody
-	//设为管理员
+	//按id查询用户
 	public void selectUserById(InputObject inputObject,OutputObject outputObject) throws Exception {
 		userManageService.selectUserById(inputObject, outputObject);
 	}

@@ -82,6 +82,45 @@
 	 	</div>
 	</div>
 	
+		<!-- 批量添加显示的model -->
+		<div class="modal fade" id="myModaadd" tabindex="-1" aria-labelledby="myModalLabel">
+		<div class="modal-dialog dialog-width-800" role="document">
+			<div class="modal-content">
+			    <div class="modal-header">
+			    	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
+			    	<h4 class="modal-title" id="myModalLabel1">批量添加职员</h4>
+				</div>
+				<div class="modal-body dialog-body">
+					<div class="form-group dialog-50">
+			    		<label for="txt_departmentname" class="dialog-label-20" >起始账号：</label>		 
+			    			<font id="userstart"></font>
+			    	</div>
+			    	<div class="form-group dialog-100">
+			    		<label for="txt_departmentname" class="dialog-label-10" >批量添加数量：</label>
+			    			<select id="addNumber" onchange="gradeChange()">
+			    			<option value="1" tag="10">10</option>
+			    			<option value="2" tag="20">20</option>
+			    			<option value="3" tag="30">30</option>
+			    			<option value="4" tag="40">40</option>
+			    			<option value="5" tag="50">50</option>
+			    			<option value="6" tag="60">60</option>
+			    			<option value="7" tag="70">70</option>
+			    			<option value="8" tag="80">80</option>
+			    			<option value="9" tag="90">90</option>
+			    			</select>
+			    	</div>
+			    	<div class="form-actions form-group">
+					  <button type="submit" id="saveNumber" class="btn btn-primary">提交</button>
+					  <button type="button" class="btn" id="cancleBean">取消</button>
+					</div>
+				</div>
+			    <div class="modal-footer">
+			    	<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
+			    </div>
+			</div>
+	 	</div>
+	</div>
+	
 	<script src="../../assest/js/jquery.js"></script>
 	<script src="../../assest/js/jquery-migrate-1.0.0.min.js"></script>
 	<script src="../../assest/js/jquery-ui-1.10.0.custom.min.js"></script>

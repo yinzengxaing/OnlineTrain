@@ -1,4 +1,4 @@
-//var oError = $("#error_box")
+var id = "";
 $(function(e){
 	eventInit();
 });
@@ -56,7 +56,8 @@ function eventInit(){
 		};
 		AjaxPostUtil.request({url:path+"/post/LoginController/loginByUserid",params:params,type:'json',callback:function(json){
 			if(json.returnCode==0){
-				location.href = 'index.html';
+				id=json.bean.id;
+				location.href = 'index.html?id='+id;
 			}else{
 				qiao.bs.msg({msg:json.returnMessage,type:'danger'});
 			}
