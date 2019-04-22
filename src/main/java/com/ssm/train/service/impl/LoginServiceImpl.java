@@ -27,6 +27,7 @@ public class LoginServiceImpl implements LoginService {
 		Map<String,Object> map = inputObject.getParams();
 		//将密码加密后，与数据库有加密密码进行对比
 		map.put("password", ToolUtil.MD5(map.get("password").toString()));
+		
 		if(JudgeUtil.isNull(map.get("user").toString())){
 			outputObject.setreturnMessage("用户名不能为空");
 			return;

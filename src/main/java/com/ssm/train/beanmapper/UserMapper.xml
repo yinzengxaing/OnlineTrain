@@ -4,11 +4,7 @@
 <mapper namespace="com.ssm.train.dao.UserMapper">
 <select id="getUserList" resultType="java.util.Map" parameterType="java.util.Map">
 	SELECT
-	id,
-	username,
-	password,
-	createTime,
-	updateTime
+	*
 FROM
 	USER
 </select>
