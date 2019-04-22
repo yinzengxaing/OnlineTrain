@@ -5,4 +5,6 @@ import com.ssm.object.OutputObject;
 
 public interface LoginService {
 	public void loginByUserid(InputObject inputObject, OutputObject outputObject) throws Exception;
+	public void selectSession(InputObject inputObject, OutputObject outputObject) throws Exception;
+	public void clearSession(InputObject inputObject, OutputObject outputObject) throws Exception;
 }

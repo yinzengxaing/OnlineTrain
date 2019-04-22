@@ -22,6 +22,7 @@
 	user.username,
 	user.sex,
 	user.username,
+	user.depid,
 	user.createTime,
 	user.updateTime,
 	department.departname,
@@ -124,12 +125,15 @@
 	<if test="username !='' and username != null">
 	username=#{username},
 	</if>
+	<if test="updateTime !='' and updateTime != null">
+	updateTime=#{updateTime},
+	</if>
 	<if test="role !='' and role != null">
 	role=#{role},
 	</if>
 	</set>
 	WHERE
-	user = #{user}
+	id = #{id}
 </update> 
 <!-- 修改账号范围的开始 -->
 <update id="updateUserStart" parameterType="java.util.Map">
@@ -159,6 +163,14 @@
 	role=1
 	WHERE
 	id = #{id}
+</update> 
+<!-- 修改用户密码 -->
+<update id="updatePassword" parameterType="java.util.Map">
+	UPDATE user
+	set
+	password=#{password}
+	WHERE
+	id = #{id};
 </update> 
 
 </mapper>

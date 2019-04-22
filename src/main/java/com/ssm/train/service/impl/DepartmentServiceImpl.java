@@ -88,6 +88,12 @@ public class DepartmentServiceImpl implements DepartmentService {
 		outputObject.settotal(total); 
 		
 	}
+	@Override
+	public void getAllDepartment(InputObject inputObject, OutputObject outputObject) throws Exception {
+		List<Map<String,Object>> beans = departmentMapper.getAllDepartment();
+		outputObject.setBeans(beans);
+		
+	}
 
 
 }

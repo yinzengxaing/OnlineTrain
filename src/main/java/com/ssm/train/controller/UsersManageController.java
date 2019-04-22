@@ -91,6 +91,13 @@ public class UsersManageController {
 		userManageService.selectUserById(inputObject, outputObject);
 	}
 	
+	@RequestMapping( "/post/UserManageController/updatePassword")
+	@ResponseBody
+	//修改密码
+	public void updatePassword(InputObject inputObject,OutputObject outputObject) throws Exception {
+		userManageService.updatePassword(inputObject, outputObject);
+	}
+	
 	
 	
 	

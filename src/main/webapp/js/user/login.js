@@ -1,19 +1,20 @@
 var id = "";
 $(function(e){
+	dataInit();
 	eventInit();
 });
 
-/*function dataInit(){
-	AjaxPostUtil.request({url:path+"/post/wechatAdminLoginController/selectSession",params:{},type:'json',callback:function(jsonSession){		
+function dataInit(){
+	AjaxPostUtil.request({url:path+"/post/LoginController/selectSession",params:{},type:'json',callback:function(jsonSession){		
 		if(jsonSession.returnCode==0){
 			if(!isNull(jsonSession.bean)){
-				location.href = 'pcsuccess.html';
+				location.href = 'index.html?id='+jsonSession.bean.id;
 			}
 		}else{
 			
 		}
 	}});
-}*/
+}
 
 function eventInit(){
 	$('#loginForm').bootstrapValidator({

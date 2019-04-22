@@ -18,5 +18,6 @@ public interface UserManageMapper {
 	public List<Map<String, Object>> selectAdministratorByName(Map<String, Object> map , PageBounds bounds) throws Exception;//按用户名查找管理员
 	public void updateUserToAdministrator(Map<String,Object> bean) throws Exception;//将该用户设置为管理员
 	public Map<String,Object> selectUserById(Map<String,Object> bean) throws Exception;//按id查找用户
+	public void updatePassword(Map<String,Object> bean) throws Exception;//修改密码 
 	
 }

@@ -27,4 +27,28 @@ public class LoginController {
 		loginService.loginByUserid(inputObject, outputObject);
 		//userService.queryUserById(inputObject, outputObject);
 	}
+	
+	/**
+	 * 获取登录信息
+	 * @param inputObject
+	 * @param outputObject
+	 * @throws Exception
+	 */
+	@RequestMapping("/post/LoginController/selectSession")
+	@ResponseBody
+	public void selectSession(InputObject inputObject,OutputObject outputObject) throws Exception{
+		loginService.selectSession(inputObject, outputObject);
+	}
+	
+	/**
+	 * 清空session
+	 * @param inputObject
+	 * @param outputObject
+	 * @throws Exception
+	 */
+	@RequestMapping("/post/LoginController/clearSession")
+	@ResponseBody
+	public void clearSession(InputObject inputObject,OutputObject outputObject) throws Exception{
+		loginService.clearSession(inputObject, outputObject);
+	}
 }

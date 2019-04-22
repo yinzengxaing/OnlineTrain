@@ -13,5 +13,5 @@ public interface DepartmentMapper {
 	Map<String,Object> getDepartment(Map<String, Object> map) throws Exception;//查询该部门是否存在
 	void deleteDepartment(Map<String, Object> map) throws Exception;//删除部门getDepartmentByName
 	List<Map<String,Object>> getDepartmentByName(Map<String, Object> map , PageBounds bounds) throws Exception;//通过部门名模糊查询
-	
+	List<Map<String,Object>> getAllDepartment() throws Exception;//查找所有
 }

@@ -16,6 +16,8 @@ public interface UserManageService {
 	public void selectAdministratorByName(InputObject inputObject, OutputObject outputObject) throws Exception;//按用户名查找管理员
 	public void updateUserToAdministrator(InputObject inputObject, OutputObject outputObject) throws Exception;//按用户名查找管理员
 	public void selectUserById(InputObject inputObject, OutputObject outputObject) throws Exception;//按id查找用户
+	public void updatePassword(InputObject inputObject, OutputObject outputObject) throws Exception;//修改密码
+	
 	
 
 }

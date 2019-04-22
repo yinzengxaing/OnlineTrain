@@ -15,11 +15,17 @@ function dataInit(){
 	eventInit();
 }
 function eventInit(){
-	$("ul#userManagement").on("click","li#personal",function(){
-	     alert(1);
-	 });
-	$("ul#userManagement").on("click","li#secure",function(){
-	     alecrt(2);
-	 });
 	
 }
+function quit(){
+	AjaxPostUtil.request({url:path+"/post/LoginController/clearSession",params:{},type:'json',callback:function(jsonSession){		
+		if(jsonSession.returnCode==0){
+			if(!isNull(jsonSession.bean)){
+				location.href = 'login.html';
+			}
+		}else{
+			
+		}
+	}});
+}
+

@@ -45,9 +45,32 @@ public class LoginServiceImpl implements LoginService {
 			if(!map.get("password").toString().equals(user.get("password").toString())){
 				outputObject.setreturnMessage("密码错误，请重新输入");
 				return;
+			}else{
+				//outputObject.setLogParams(user);
 			}
 		}
 		
+	}
+	/**
+	 * 获取登录信息
+	 */
+	@Override
+	public void selectSession(InputObject inputObject, OutputObject outputObject) throws Exception {
+		Map<String, Object> map = inputObject.getLogParams();
+		if(map==null){
+			outputObject.setreturnMessage("Session为空,获取信息失败...");
+		}else{
+			outputObject.setBean(map);
+		}
+	}
+	
+	/**
+	 * 清空session
+	 */
+	@SuppressWarnings("static-access")
+	@Override 
+	public void clearSession(InputObject inputObject, OutputObject outputObject) throws Exception {
+		outputObject.getRequest().getSession().invalidate();
 	}
 
 }

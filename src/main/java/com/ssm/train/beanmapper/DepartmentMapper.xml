@@ -14,6 +14,15 @@ FROM
 WHERE
     id != 7; 
 </select>
+<select id="getAllDepartment" resultType="java.util.Map" parameterType="java.util.Map">
+	SELECT
+	id,
+	departname,
+	createTime,
+	updateTime
+FROM
+	department
+</select>
 <!-- 部门名称模糊查询 -->
 <select id="getDepartmentByName" resultType="java.util.Map" parameterType="java.util.Map">
 	SELECT

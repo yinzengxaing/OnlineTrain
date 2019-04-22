@@ -102,18 +102,7 @@ public class UserManageServiceImpl implements UserManageService {
 	public void updateUserInfo(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String,Object> map = inputObject.getParams();
 		map.put("updateTime", ToolUtil.getTimeAndToString().substring(0, 10));
-		if(JudgeUtil.isNull(map.get("telephonenumber").toString())){
-			outputObject.setreturnMessage("手机号不能为空");
-		}
-		else if(!JudgeUtil.isPhoneNO(map.get("telephonenumber").toString())){
-			outputObject.setreturnMessage("手机号不合法");
-		}
-		else if(JudgeUtil.isNull(map.get("username").toString())){
-			outputObject.setreturnMessage("姓名不能为空");
-		}
-		else{
 			userManageMapper.updateUserInfo(map);
-		}
 	}
 	//查询用户账号起始值
 	@Override
@@ -172,6 +161,18 @@ public class UserManageServiceImpl implements UserManageService {
 		Map<String,Object> params = inputObject.getParams();
 		Map<String,Object> bean = userManageMapper.selectUserById(params);
 		outputObject.setBean(bean);
+		
+	}
+	//修改密码
+	@Override
+	public void updatePassword(InputObject inputObject, OutputObject outputObject) throws Exception {
+		Map<String,Object> params = inputObject.getParams();
+		if(params.get("newpassword").toString().equals(params.get("secondpassword").toString())){
+			params.put("password", ToolUtil.MD5(params.get("newpassword").toString()));
+			userManageMapper.updatePassword(params);
+		}else{
+			outputObject.setreturnMessage("两次输入的密码不一致，请重新输入");
+		}
 		
 	}
 

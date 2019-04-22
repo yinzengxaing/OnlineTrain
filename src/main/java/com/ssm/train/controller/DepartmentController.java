@@ -50,5 +50,12 @@ public class DepartmentController {
 			departmentService.getDepartmentByName(inputObject, outputObject);
 	}
 	
+	//查询所有部门
+	@RequestMapping( "/post/DepartmentController/getAllDepartment")
+	@ResponseBody
+	public void getAllDepartment(InputObject inputObject,OutputObject outputObject) throws Exception {
+				departmentService.getAllDepartment(inputObject, outputObject);
+	}
+	
 	
 }
