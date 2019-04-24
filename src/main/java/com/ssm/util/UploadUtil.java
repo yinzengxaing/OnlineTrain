@@ -129,7 +129,8 @@ public class UploadUtil {
 	 */
 	@SuppressWarnings("static-access")
 	public static Map<String , Object> vedioUpload(InputObject inputObject,OutputObject outputObject,CommonsMultipartFile files) throws Exception{
-		String fileRealResistPath = "upload\\vedio\\main\\";// 文件存放真实相对路径
+		//String fileRealResistPath = "upload\\vedio\\main\\";// 文件存放真实相对路径
+		String fileRealResistPath = "html/course/";
 		String Gfile = inputObject.getRequest().getSession().getServletContext().getRealPath("/");
 		String filePath = Gfile + fileRealResistPath;
 		

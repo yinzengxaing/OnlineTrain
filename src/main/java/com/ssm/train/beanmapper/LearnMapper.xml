@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+          "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssm.train.dao.LearnMapper">
+<!-- 获取播放里列表 -->
+<select id="findAll" resultType="java.util.Map" parameterType="java.util.Map">
+		select * from videoup
+</select>
+</mapper>
