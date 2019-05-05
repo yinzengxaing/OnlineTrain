@@ -1,4 +1,4 @@
-var userid=70;
+var userstart="";
 $(function(e){
 	dataInit();
 });
@@ -16,7 +16,7 @@ var TableInit = function (){
 	//初始化Table
 	oTableInit.Init = function () {
 		$('#massage').bootstrapTable({
-			url: path+'/post/CourseManageController/selectUnfinishCourse',             //请求后台的URL（*） 
+			url: path+'/post/CourseManageController/selectAllCourseInfo',             //请求后台的URL（*） 
 			method: 'post',                     //请求方式（*）
 			toolbar: '#toolbar',                //工具按钮用哪个容器
 			striped: true,                      //是否显示行间隔色
@@ -55,34 +55,28 @@ var TableInit = function (){
 					return '<a style="word-wrap:break-word;">'+value+'</a>';
 				}
 			},{
-				field: 'cend',
-				title: '截止时间',
+				field: 'cstart',
+				title: '创建时间',
 				align: 'center',
 				width: '200',
 				formatter: function (value, row, index) {
 					return '<a style="word-wrap:break-word;">'+value+'</a>';
 				}
 			},{
-				field :'finishstudy',
-				title: '视频进度',
+				field :'cend',
+				title: '截止时间',
 				align: 'center',
         	  	width: '100',
         	  	formatter: function (value, row, index){
-        	  		return '<a style="word-wrap:break-word;">'+value+'%'+'</a>';
+        	  		return '<a style="word-wrap:break-word;">'+value+'</a>';
         	  	}
 			},{
-				field :'finishtest',
-				title: '考试',
+				field :'departname',
+				title: '部门',
 				align: 'center',
         	  	width: '100',
         	  	formatter: function (value, row, index){
-        	  		if(value==0){
-        	  			return '<a style="word-wrap:break-word;">'+'未完成'+'</a>';
-        	  		}
-        	  		else{
-        	  			return '<a style="word-wrap:break-word;">'+'已完成'+'</a>';
-        	  		}
-        	  		
+        	  		return '<a style="word-wrap:break-word;">'+value+'</a>';
         	  	}
 			},{
 				field: 'operate',
@@ -105,7 +99,7 @@ var TableInit = function (){
 		var temp={
 				limit: params.limit,   // 页面大小
 				offset: params.offset,  // 页码
-				userid:userid
+				username:$('#username').val()
 		};
 		return temp;
 	};
@@ -115,20 +109,16 @@ var TableInit = function (){
 //操作按钮点击事件
 window.EvenInit = {
 		'click .RoleOfA': function (e, value, row, index) { // 删除一个分类
-			location.href = "coursePlayer.html?path="+row.path;
-			},
-        'click .RoleOfB': function (e, value, row, index) { // 删除一个分类
-	         // location.href = "coursePlayer.html?courseId="+row.cid;
-	        }
+			location.href = "course_add.html?courseId="+row.id+"&&videoId="+row.fileId;
+			}
 			
 		};
 function operateFormatter(value, row, index) {
 		return [
-		        '<button type="button" class="RoleOfA btn btn-default  btn-sm" style="margin-right:15px;">视频</button>',
-		        '<button type="button" class="RoleOfB btn btn-default  btn-sm" style="margin-right:15px;">考试</button>'
+		        '<button type="button" class="RoleOfA btn btn-default  btn-sm" style="margin-right:15px;">编辑</button>'
 		        ].join('');
 };
 //刷新表格
 function refreshTable(){
-	$('#massage').bootstrapTable('refresh',{url:path+'/post/CourseManageController/selectUnfinishCourse'});
+	$('#massage').bootstrapTable('refresh',{url:path+'/post/CourseManageController/selectAllCourseInfo'});
 }

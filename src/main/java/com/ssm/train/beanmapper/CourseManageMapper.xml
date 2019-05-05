@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+          "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssm.train.dao.CourseManageMapper">
+<!-- 查找所有课程信息 -->
+<select id="selectAllCourseInfo" resultType="java.util.Map" parameterType="java.util.Map">
+	SELECT 
+	course.id,
+	course.cname,
+	course.cstart,
+	course.cend,
+	department.departname,
+	videoup.fileId
+    FROM course,department,videoup
+    WHERE course.did=department.id AND course.id=videoup.courseId
+</select>
+<!-- 查找未完成课程 -->
+<select id="selectUnfinishCourse" resultType="java.util.Map" parameterType="java.util.Map">
+	SELECT 
+	course.cname,
+	course.cend,
+	train.finishstudy,
+	train.finishtest,
+	train.cid,
+	videoup.path
+    FROM course,train,videoup
+    WHERE course.id=train.cid 
+    AND videoup.courseId=course.id
+    AND train.userid=#{userid} 
+    AND (train.finishstudy!=100 OR train.finishtest=0)
+</select>
+</mapper>

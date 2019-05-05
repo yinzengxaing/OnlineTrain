@@ -12,5 +12,6 @@ import com.ssm.object.OutputObject;
  */
 
 public interface LearnService {
-	public void findAll(InputObject inputObject, OutputObject outputObject) throws Exception;//获取播放列表
+	//获取播放列表
+	public void findAll(InputObject inputObject, OutputObject outputObject) throws Exception;
 }

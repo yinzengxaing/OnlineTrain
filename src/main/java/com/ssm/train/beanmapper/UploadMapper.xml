@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
           "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ssm.train.dao.UploadMapper">
-
-	<insert id="insertVideo"  parameterType="java.util.Map">
+   <!-- 上传视频-->
+	<insert id="insertVideo"  parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="fileId">
       INSERT INTO `videoup` (
 		titleOrig,
 		titleAlter,
@@ -15,4 +15,171 @@
 		VALUES
 		(#{titleOrig}, #{titleAlter}, #{size}, #{type}, #{path},#{uploadTime})
 	</insert>
+	<!-- 插入课程信息 -->
+	<insert id="insertCourse"  parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="id">
+      INSERT INTO course (
+		cname,
+		cend,
+		cstart,
+		introduce,
+		did,
+		userid
+		)
+		VALUES
+		(#{cname}, #{cend}, #{cstart}, #{introduce}, #{did},#{userid})
+	</insert>
+	
+	<!-- 插入课程信息 -->
+	<insert id="insertExam"  parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="id">
+      INSERT INTO exam (
+		courseId,
+		count,
+		score,
+		time
+		)
+		VALUES
+		(#{courseId}, #{count}, #{score}, #{time})
+	</insert>
+	
+	<!-- 设置视频对应的课程 -->
+	<update id="updateVideoCourseId" parameterType="java.util.Map">
+	UPDATE videoup
+	set
+	courseId=#{courseId}
+	WHERE
+	fileId = #{fileId}
+	</update> 
+	<!-- 修改课程信息 -->
+	<update id="updateCourseInfo" parameterType="java.util.Map">
+	UPDATE course
+	<set>
+	<if test="cname !='' and cname != null">
+	cname=#{cname},
+	</if>
+	<if test="cend !='' and cend != null">
+	cend=#{cend},
+	</if>
+	<if test="introduce !='' and introduce != null">
+	introduce=#{introduce},
+	</if>
+	<if test="did !='' and did != null">
+	did=#{did},
+	</if>
+	</set>
+	WHERE
+	id = #{id}
+	</update> 
+	<!--查找课程信息-->
+	<select id="selectCourseInfo" resultType="java.util.Map" parameterType="java.util.Map">
+	SELECT 
+	id,
+	cname,
+	cstart,
+	cend,
+	introduce,
+	did,
+	userid
+	FROM course 
+	WHERE 
+	id=#{id};
+    </select>
+    
+    <!-- 删除课程 -->
+	<delete id="deleteCourse" parameterType="java.util.Map">
+		DELETE FROM course
+		WHERE id=#{id}
+	</delete>
+	
+	<!-- 删除视频 -->
+	<delete id="deleteVideo" parameterType="java.util.Map">
+		DELETE FROM videoup
+		WHERE fileId=#{id}
+	</delete>
+	<!-- 添加试题 -->
+	<insert id="insertTest"  parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="id">
+      INSERT INTO test(
+		include,
+		option1,
+		option2,
+		option3,
+		option4,
+		answer,
+		examid
+		)
+		VALUES
+		(#{include}, #{option1}, #{option2}, #{option3}, #{option3},#{answer},#{examid})
+	</insert>
+	
+	<!--按id查找考试信息-->
+	<select id="selectExamById" resultType="java.util.Map" parameterType="java.util.Map">
+	SELECT 
+	id,
+	courseId,
+	count,
+	score,
+	time
+	FROM exam 
+	WHERE 
+	id=#{id};
+    </select>
+    <!--按id查找试题信息-->
+	<select id="selectTestById" resultType="java.util.Map" parameterType="java.util.Map">
+	SELECT 
+	include,
+	option1,
+	option2,
+	option3,
+	option4,
+	answer
+	FROM test 
+	WHERE 
+	id=#{id};
+    </select>
+ 
+    <!-- 修改试题信息 -->
+	<update id="updateTest" parameterType="java.util.Map">
+	UPDATE test
+	set
+	include=#{include},
+	option1=#{option1},
+	option2=#{option2},
+	option3=#{option3},
+	option4=#{option4},
+	answer=#{answer}
+	WHERE
+	id = #{id}
+	</update> 
+	
+	<!-- 按examid删除试题-->
+	<delete id="deleteTestByExamid" parameterType="java.util.Map">
+		DELETE FROM test
+		WHERE examid=#{examid}
+	</delete>
+	
+	<!-- 修改试题信息 -->
+	<update id="updateExam"  parameterType="java.util.Map">
+      UPDATE exam 
+      set
+		courseId=#{courseId},
+		count=#{count},
+		score=#{score},
+		time=#{time}
+	  WHERE
+	    id=#{id}
+	</update>
+	
+	<!-- 删除试卷-->
+	<delete id="deleteExam" parameterType="java.util.Map">
+		DELETE FROM exam
+		WHERE id=#{id}
+	</delete>
+	
+	<!-- 更新train -->
+	<insert id="insertTrain"  parameterType="java.util.Map">
+      insert into train(userid,cid)
+	  select user.id,course.id
+      from user,course
+      where user.depid=course.did and course.id=#{id};
+	</insert>
+	
 </mapper>

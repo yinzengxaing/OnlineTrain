@@ -25,63 +25,60 @@
 	
 	
 <meta charset="UTF-8">
-<title>视频上传</title>
+<title>试题创建</title>
 </head>
 <body>
 	<div class="row-fluid sortable">
 		<div class="box span12">
 			<div class="box-header" data-original-title>
-				<h2><i class="halflings-icon edit"></i><span class="break"></span>创建课程</h2>
+				<h2><i class="halflings-icon edit"></i><span class="break"></span>试题创建</h2>
 				<div class="box-icon">
 					<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
 				</div>
 			</div>
 			<div class="box-content" style="text-align: center;">
-				<form id="addCourseForm">
-					<div class="controls form-group margin-top-40">
-						<span style="color:#FF9966">*</span><span class="add-on">课程名：</span>
-						<input type="text" class="span6 typeahead form-control" id="cname" name="username" placeholder="请输入课程名"/>
-					</div>
-					<span style="color:#FF9966">*</span><span class="add-on">截止时间：</span>
-					<input id="cend" class="span6 typeahead form-control" type="date" value="2019-04-25"/>
-					<div class="controls form-group margin-top-40">
-						<span style="color:#FF9966">*</span><span class="add-on">课程介绍：</span>
-						<textarea rows="3" cols="50" class="span6 typeahead form-control" id="introduce" name="introduce" placeholder="请输入课程介绍！！！"></textarea>
+				
+				    <div class="controls form-group margin-top-40">
+						<span style="color:#FF9966">*</span><span class="add-on">课程名称：</span>
+						<input type="text" class="span6 typeahead form-control" id="cname" name="cname"/>
 					</div>
 					<div class="controls form-group margin-top-40">
-						<span style="color:#FF9966">*</span><span class="add-on">部门名称：</span>
-						<select class="departnameList" id="departnameList" name="departname" onchange="gradeChangedepart()">
-						
+						<span style="color:#FF9966">*</span><span class="add-on">考试时长：</span>
+						<select id="time">
+			    			<option value="0.5" tag="0.5">30分钟</option>
+			    			<option value="1" tag="1">1小时</option>
+			    			<option value="1.5" tag="1.5">1.5小时</option>
+			    			<option value="2" tag="2">2小时</option>
 			    		</select>
 					</div>
-
 					<div class="controls form-group margin-top-40">
-						<span style="color:#FF9966">*</span><span class="add-on">视频上传：</span>
-						<div class="menuContent" style="border: 0px">
-							<img src="../../assest/img/pictop.png" class="roleLogoPic" id="logo">
-							<input type="file" class="showImgBtn" id="videoFiles" name="videoFiles">
-						</div>
+						<span style="color:#FF9966">*</span><span class="add-on">题量：</span>
+						<select id="count" onchange="countChange()">
+			    			<option value="20" tag="20">20题</option>
+			    			<option value="25" tag="25">25题</option>
+			    			<option value="50" tag="50">50题</option>
+			    		</select>
+					</div>
+					<div class="controls form-group margin-top-40">
+						<span style="color:#FF9966">*</span><span class="add-on">每题分值：</span>
+						<select id="score" onchange="scoreChange()">
+			    			<option value="5" tag="5">5分</option>
+			    			<option value="4" tag="4">4分</option>
+			    			<option value="2" tag="2">2分</option>
+			    		</select>
 					</div>
 					<div class="form-actions form-group">
 					  <button type="submit" id="save" class="btn btn-primary">下一步</button>
-					  <button type="button" class="btn" id="cancle">取消</button>
+					  <button type="button" class="btn" id="cancle">上一步</button>
 					</div>
 					<br/>
 					<br/>
 					<br/>
 					<br/>
-					<br/>
-				</form>   
+					<br/>   
 			</div>
 		</div>
 	</div>
-	<script id="departId" type="text/x-handlebars-template"> 
-	{{#each rows}}
-      <option value="{{id}}" tag="{{id}}">{{departname}}</option>
-	{{/each}}
-	</script>
-	
-
 
 	<script src="../../assest/js/jquery.js"></script>
 	<script src="../../assest/js/jquery-migrate-1.0.0.min.js"></script>
@@ -121,14 +118,10 @@
 	<script src="../../assest/js/jquery-fileupload/cors/jquery.xdr-transport.js"></script>
 	<script src="../../assest/js/jquery-fileupload/jquery.fileupload-process.js"></script>
 	<script src="../../assest/js/jquery-fileupload/jquery.fileupload-validate.js"></script>
-
-
-
-	
 	<script type="text/javascript" src="../../assest/bootstrap/qiao.js"></script>
 	<script type="text/javascript" src="../../js/util/main.js"></script>
 	<script type="text/javascript" src="../../js/util/handlebars-v4.0.5.js"></script>
-	<script type="text/javascript" src="../../js/course/course_add.js"></script>
+	<script type="text/javascript" src="../../js/course/exam.js"></script>
 </body>
 
 

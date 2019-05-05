@@ -13,7 +13,7 @@ $(function(e){
 function dataInit(){
 	AjaxPostUtil.request({url:path+"/post/DepartmentController/getAllDepartment",params:"",type:'json',callback:function(json){
 		if(json.returnCode == 0){
-			var source = $("#departId").html();  
+			var source = $("#departId").html();
 		    var template = Handlebars.compile(source);
 		    $("#departnameList").html(template(json));
 		    var params  = {
@@ -24,7 +24,9 @@ function dataInit(){
 				if(json.returnCode == 0){
 					$('#username').val(json.bean.username);
 					$('#sex').val(json.bean.sex);
+					sex=json.bean.sex;
 					$('#departnameList').val(json.bean.depid);
+					depid=json.bean.depid;
 					$('#telephonenumber').val(json.bean.telephonenumber);
 				}else{
 					qiao.bs.msg({msg:json.returnMessage,type:'danger'});
@@ -48,15 +50,14 @@ function eventInit(){
 			validating: 'glyphicon glyphicon-refresh'
 		},
 		fields: {
-			//产品名称
 			username: {
 				validators: {
 					notEmpty: {
-						message: '用户名不能为空！'
+						message: '姓名不能为空！'
 					},
 					stringLength: {
-						 max: 20,
-						message: '用户名长度必须小于20字符！'
+						max: 20,
+						message: '姓名长度应小于20位'
 					}
 				}
 			},
@@ -86,7 +87,7 @@ function eventInit(){
 					depid:depid,
 					telephonenumber: $('#telephonenumber').val()
 			};
-			//进行部门的添加
+			//修改个人信息
 			AjaxPostUtil.request({url:path+"/post/UserManageController/updateUserInfo",params:params,type:'json',callback:function(json){
 				if(json.returnCode == 0){
 					$("#save").hide();

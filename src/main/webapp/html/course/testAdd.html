@@ -25,46 +25,49 @@
 	
 	
 <meta charset="UTF-8">
-<title>视频上传</title>
+<title>试题创建</title>
 </head>
 <body>
 	<div class="row-fluid sortable">
 		<div class="box span12">
 			<div class="box-header" data-original-title>
-				<h2><i class="halflings-icon edit"></i><span class="break"></span>创建课程</h2>
+				<h2><i class="halflings-icon edit"></i><span class="break"></span>试题创建</h2>
 				<div class="box-icon">
 					<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
 				</div>
 			</div>
 			<div class="box-content" style="text-align: center;">
-				<form id="addCourseForm">
-					<div class="controls form-group margin-top-40">
-						<span style="color:#FF9966">*</span><span class="add-on">课程名：</span>
-						<input type="text" class="span6 typeahead form-control" id="cname" name="username" placeholder="请输入课程名"/>
-					</div>
-					<span style="color:#FF9966">*</span><span class="add-on">截止时间：</span>
-					<input id="cend" class="span6 typeahead form-control" type="date" value="2019-04-25"/>
-					<div class="controls form-group margin-top-40">
-						<span style="color:#FF9966">*</span><span class="add-on">课程介绍：</span>
-						<textarea rows="3" cols="50" class="span6 typeahead form-control" id="introduce" name="introduce" placeholder="请输入课程介绍！！！"></textarea>
+			   <span id="testNumber" class="add-on"></span>
+				<form id="addTestForm">
+				    <div class="controls form-group margin-top-40">
+						<span style="color:#FF9966">*</span><span class="add-on">题目：</span>
+						<textarea rows="3" cols="50" class="span6 typeahead form-control" id="include" name="include" placeholder="请输入试题题目！！！"></textarea>
 					</div>
 					<div class="controls form-group margin-top-40">
-						<span style="color:#FF9966">*</span><span class="add-on">部门名称：</span>
-						<select class="departnameList" id="departnameList" name="departname" onchange="gradeChangedepart()">
-						
-			    		</select>
+						<span style="color:#FF9966">*</span><span class="add-on">选项一：</span>
+						<input type="text" class="span6 typeahead form-control" id="option1" name="option1" placeholder="请输入选项一内容"/>
 					</div>
-
 					<div class="controls form-group margin-top-40">
-						<span style="color:#FF9966">*</span><span class="add-on">视频上传：</span>
-						<div class="menuContent" style="border: 0px">
-							<img src="../../assest/img/pictop.png" class="roleLogoPic" id="logo">
-							<input type="file" class="showImgBtn" id="videoFiles" name="videoFiles">
-						</div>
+						<span style="color:#FF9966">*</span><span class="add-on">选项二：</span>
+						<input type="text" class="span6 typeahead form-control" id="option2" name="option2" placeholder="请输入选项二内容"/>
+					</div>
+					<div class="controls form-group margin-top-40">
+						<span style="color:#FF9966">*</span><span class="add-on">选项三：</span>
+						<input type="text" class="span6 typeahead form-control" id="option3" name="option3" placeholder="请输入选项三内容"/>
+					</div>
+					<div class="controls form-group margin-top-40">
+						<span style="color:#FF9966">*</span><span class="add-on">选项四：</span>
+						<input type="text" class="span6 typeahead form-control" id="option4" name="option4" placeholder="请输入选项四内容"/>
+					</div>
+					<div class="controls form-group margin-top-40">
+						<span style="color:#FF9966">*</span><span class="add-on">答案：</span>
+						<input type="text" class="span6 typeahead form-control" id="answer" name="answer" placeholder="请输入答案内容"/>
 					</div>
 					<div class="form-actions form-group">
-					  <button type="submit" id="save" class="btn btn-primary">下一步</button>
-					  <button type="button" class="btn" id="cancle">取消</button>
+					  <button type="submit" id="save" class="btn btn-primary">下一题</button>
+					  <button type="button" class="btn" id="cancle">上一步</button>
+					  <button type="button" class="btn" id="last">上一题</button>
+					  <button type="button" class="btn" id="finish">完成</button>
 					</div>
 					<br/>
 					<br/>
@@ -75,14 +78,6 @@
 			</div>
 		</div>
 	</div>
-	<script id="departId" type="text/x-handlebars-template"> 
-	{{#each rows}}
-      <option value="{{id}}" tag="{{id}}">{{departname}}</option>
-	{{/each}}
-	</script>
-	
-
-
 	<script src="../../assest/js/jquery.js"></script>
 	<script src="../../assest/js/jquery-migrate-1.0.0.min.js"></script>
 	<script src="../../assest/js/jquery-ui-1.10.0.custom.min.js"></script>
@@ -121,14 +116,10 @@
 	<script src="../../assest/js/jquery-fileupload/cors/jquery.xdr-transport.js"></script>
 	<script src="../../assest/js/jquery-fileupload/jquery.fileupload-process.js"></script>
 	<script src="../../assest/js/jquery-fileupload/jquery.fileupload-validate.js"></script>
-
-
-
-	
 	<script type="text/javascript" src="../../assest/bootstrap/qiao.js"></script>
 	<script type="text/javascript" src="../../js/util/main.js"></script>
 	<script type="text/javascript" src="../../js/util/handlebars-v4.0.5.js"></script>
-	<script type="text/javascript" src="../../js/course/course_add.js"></script>
+	<script type="text/javascript" src="../../js/course/testAdd.js"></script>
 </body>
 
 
