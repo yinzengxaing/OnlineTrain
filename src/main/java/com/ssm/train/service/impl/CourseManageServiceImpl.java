@@ -53,5 +53,57 @@ public class CourseManageServiceImpl implements CourseManageService {
 		
 	}
 	
+	//发布课程 
+	@Override
+	public void publishCourse(InputObject inputObject, OutputObject outputObject) throws Exception {
+		Map<String,Object> params = inputObject.getParams();
+		courseManagemapper.publishCourse(params);
+		courseManagemapper.insertTrain(params);
+	}
+	
+	//取消发布课程
+	@Override
+	public void cancelPublishCourse(InputObject inputObject, OutputObject outputObject) throws Exception {
+		Map<String,Object> params = inputObject.getParams();
+		courseManagemapper.cancelPublishCourse(params);
+		courseManagemapper.deleteTrain(params);		
+	}
+	
+	//更新课程视频播放进度
+	@Override
+	public void updateVideoTime(InputObject inputObject, OutputObject outputObject) throws Exception {
+		Map<String,Object> params = inputObject.getParams();
+		courseManagemapper.updateVideoTime(params);
+		
+	}
+	
+	//查询培训
+	@Override
+	public void selectTrain(InputObject inputObject, OutputObject outputObject) throws Exception {
+		Map<String,Object> params = inputObject.getParams();
+		Map<String,Object> bean = courseManagemapper.selectTrain(params);
+		outputObject.setBean(bean);
+		
+	}
+	
+	//查询考试基本信息
+	@Override
+	public void selectCourseForTest(InputObject inputObject, OutputObject outputObject) throws Exception {
+		Map<String,Object> params = inputObject.getParams();
+		Map<String,Object>bean = courseManagemapper.selectCourseForTest(params);
+		outputObject.setBean(bean);
+	}
+	
+	//获取试卷
+	@Override
+	public void selectTestList(InputObject inputObject, OutputObject outputObject) throws Exception {
+		Map<String,Object> params = inputObject.getParams();
+		List<Map<String,Object>> beans = courseManagemapper.selectTestList(params);
+		for(int i=0;i<beans.size();i++){
+			beans.get(i).put("number", i+1);
+		}
+		outputObject.setBeans(beans);
+	}
+	
 
 }

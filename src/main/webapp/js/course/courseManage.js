@@ -79,6 +79,19 @@ var TableInit = function (){
         	  		return '<a style="word-wrap:break-word;">'+value+'</a>';
         	  	}
 			},{
+				field :'publish',
+				title: '是否发布',
+				align: 'center',
+        	  	width: '100',
+        	  	formatter: function (value, row, index){
+        	  		if(value==0){
+        	  		return '<a style="word-wrap:break-word;">'+'未发布'+'</a>';
+        	  		}
+        	  		else{
+        	  		return '<a style="word-wrap:break-word;">'+'已发布'+'</a>';
+        	  		}
+        	  	}
+			},{
 				field: 'operate',
 	            title: '操作',
 	            width: '300',
@@ -108,15 +121,51 @@ var TableInit = function (){
 
 //操作按钮点击事件
 window.EvenInit = {
-		'click .RoleOfA': function (e, value, row, index) { // 删除一个分类
+		'click .RoleOfA': function (e, value, row, index) {
 			location.href = "course_add.html?courseId="+row.id+"&&videoId="+row.fileId;
+			},
+		'click .RoleOfB': function (e, value, row, index) { // 发布
+			var params  = {
+					id:row.id
+			};
+			//插入到train表
+			AjaxPostUtil.request({url:path+"/post/CourseManageController/publishCourse",params:params,type:'json',callback:function(json){
+				if(json.returnCode == 0){
+					setTimeout(refreshTable,500);//半秒后刷新页面
+				}else{
+					qiao.bs.msg({msg:json.returnMessage,type:'danger'});
+				}
 			}
+			});
+		    },
+		  'click .RoleOfC': function (e, value, row, index) { // 取消发布
+				var params  = {
+						id:row.id
+				};
+				//插入到train表
+				AjaxPostUtil.request({url:path+"/post/CourseManageController/cancelPublishCourse",params:params,type:'json',callback:function(json){
+					if(json.returnCode == 0){
+						setTimeout(refreshTable,500);//半秒后刷新页面
+					}else{
+						qiao.bs.msg({msg:json.returnMessage,type:'danger'});
+					}
+				}
+				});
+		  }
 			
 		};
 function operateFormatter(value, row, index) {
+	    if(row.publish==0){
 		return [
-		        '<button type="button" class="RoleOfA btn btn-default  btn-sm" style="margin-right:15px;">编辑</button>'
+		        '<button type="button" class="RoleOfA btn btn-default  btn-sm" style="margin-right:15px;">编辑</button>',
+				'<button type="button" id="publish" class="RoleOfB btn btn-default  btn-sm" style="margin-right:15px;">发布</button>'
 		        ].join('');
+	    }else{
+	    return [
+	    	 '<button type="button" class="RoleOfA btn btn-default  btn-sm" style="margin-right:15px;">编辑</button>',
+			 '<button type="button" id="publish" class="RoleOfC btn btn-default  btn-sm" style="margin-right:15px;">取消发布</button>'
+		        ].join('');
+	    }
 };
 //刷新表格
 function refreshTable(){

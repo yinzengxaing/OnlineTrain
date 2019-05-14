@@ -114,11 +114,11 @@ var TableInit = function (){
 
 //操作按钮点击事件
 window.EvenInit = {
-		'click .RoleOfA': function (e, value, row, index) { // 删除一个分类
-			location.href = "coursePlayer.html?path="+row.path;
+		'click .RoleOfA': function (e, value, row, index) { // 视频播放
+			location.href = "coursePlayer.html?path="+row.path+"&&courseId="+row.id;
 			},
-        'click .RoleOfB': function (e, value, row, index) { // 删除一个分类
-	         // location.href = "coursePlayer.html?courseId="+row.cid;
+        'click .RoleOfB': function (e, value, row, index) { // 考试
+	        location.href = "test.html?courseId="+row.id;
 	        }
 			
 		};

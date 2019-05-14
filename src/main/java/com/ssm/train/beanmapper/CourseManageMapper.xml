@@ -9,6 +9,7 @@
 	course.cname,
 	course.cstart,
 	course.cend,
+	course.publish,
 	department.departname,
 	videoup.fileId
     FROM course,department,videoup
@@ -17,6 +18,7 @@
 <!-- 查找未完成课程 -->
 <select id="selectUnfinishCourse" resultType="java.util.Map" parameterType="java.util.Map">
 	SELECT 
+	course.id,
 	course.cname,
 	course.cend,
 	train.finishstudy,
@@ -28,5 +30,79 @@
     AND videoup.courseId=course.id
     AND train.userid=#{userid} 
     AND (train.finishstudy!=100 OR train.finishtest=0)
+</select>
+<!-- 发布课程 -->
+<update id="publishCourse"  parameterType="java.util.Map">
+      UPDATE course 
+      set
+		publish=1
+	  WHERE
+	    id=#{id}
+</update>
+<!-- 绑定培训关系 -->
+<insert id="insertTrain"  parameterType="java.util.Map">
+      insert into train(userid,cid)
+	  select user.id,course.id
+      from user,course
+      where user.depid=course.did and course.id=#{id};
+</insert>
+<!-- 取消发布课程 -->
+<update id="cancelPublishCourse"  parameterType="java.util.Map">
+      UPDATE course 
+      set
+		publish=0
+	  WHERE
+	    id=#{id}
+</update>
+<!-- 取消培训关系 -->
+<delete id="deleteTrain" parameterType="java.util.Map">
+		DELETE FROM train
+		WHERE cid=#{id}
+</delete>
+
+<!-- 更新课程视频播放进度 -->
+<update id="updateVideoTime"  parameterType="java.util.Map">
+      UPDATE train 
+      set
+		finishstudy=#{finishstudy},
+		videotime=#{videotime}
+	  WHERE
+	    cid=#{cid} AND userid=#{userid}
+</update>
+
+<!-- 查询培训 -->
+<select id="selectTrain" resultType="java.util.Map" parameterType="java.util.Map">
+	SELECT 
+	videotime
+    FROM train
+    WHERE
+    cid=#{cid} AND userid=#{userid}
+</select>
+
+<!-- 查询考试基本信息 -->
+<select id="selectCourseForTest" resultType="java.util.Map" parameterType="java.util.Map">
+	SELECT 
+	course.cname,
+	exam.count,
+	exam.score,
+	exam.time
+    FROM course,exam
+    WHERE
+    exam.courseId=course.id AND course.id=#{id}
+</select>
+
+<!-- 获取试卷 -->
+<select id="selectTestList" resultType="java.util.Map" parameterType="java.util.Map">
+	SELECT 
+	test.id,
+	test.include,
+	test.option1,
+	test.option2,
+	test.option3,
+	test.option4,
+	test.answer
+    FROM course,exam,test
+    WHERE
+    test.examid=exam.id AND exam.courseId=#{id}
 </select>
 </mapper>

@@ -251,19 +251,6 @@ function eventInit(){
 		//插入课程信息
 		AjaxPostUtil.request({url:path+"/post/UploadController/insertTest",params:params,type:'json',callback:function(json){
 			if(json.returnCode == 0){
-				//设置参数
-				var params  = {
-						id:courseId
-				};
-				//插入到train表
-				AjaxPostUtil.request({url:path+"/post/UploadController/insertTrain",params:params,type:'json',callback:function(json){
-					if(json.returnCode == 0){
-						location.href="index.html";
-					}else{
-						qiao.bs.msg({msg:json.returnMessage,type:'danger'});
-					}
-				}
-				});
 				
 			}else{
 				qiao.bs.msg({msg:json.returnMessage,type:'danger'});
