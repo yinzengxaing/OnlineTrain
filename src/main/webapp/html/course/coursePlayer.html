@@ -1,43 +1,71 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="description" content="Bootstrap Metro Dashboard">
-	<meta name="author" content="Dennis Ji">
-	<meta name="keyword" content="Metro, Metro UI, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link id="bootstrap-style" href="../../assest/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="../../assest/bootstrap/bootstrap-validator/css/bootstrapValidator.css">
-	<link rel="stylesheet" type="text/css" href="../../assest/bootstrap/bootstrap-select/css/bootstrap-multiselect.css">
-	<link href="../../assest/css/bootstrap-responsive.min.css" rel="stylesheet">
-	<link id="base-style" href="../../assest/css/style.css" rel="stylesheet">
-	<link id="base-style-responsive" href="../../assest/css/style-responsive.css" rel="stylesheet">
-	
-	
-	<!--[if lt IE 9]>
+<meta charset="utf-8">
+<meta name="description" content="Bootstrap Metro Dashboard">
+<meta name="author" content="Dennis Ji">
+<meta name="keyword"
+	content="Metro, Metro UI, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link id="bootstrap-style"
+	href="../../assest/bootstrap/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<link rel="stylesheet" type="text/css"
+	href="../../assest/bootstrap/bootstrap-validator/css/bootstrapValidator.css">
+<link rel="stylesheet" type="text/css"
+	href="../../assest/bootstrap/bootstrap-select/css/bootstrap-multiselect.css">
+<link href="../../assest/css/bootstrap-responsive.min.css"
+	rel="stylesheet">
+<link id="base-style" href="../../assest/css/style.css" rel="stylesheet">
+<link id="base-style-responsive"
+	href="../../assest/css/style-responsive.css" rel="stylesheet">
+
+
+<!--[if lt IE 9]>
 	  	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<link id="ie-style" href="../../assest/css/ie.css" rel="stylesheet">
 	<![endif]-->
-	<!--[if IE 9]>
+<!--[if IE 9]>
 		<link id="ie9style" href="../../assest/css/ie9.css" rel="stylesheet">
 	<![endif]-->
-	<link rel="shortcut icon" href="../../assest/img/favicon.ico">
-	
-	
+<link rel="shortcut icon" href="../../assest/img/favicon.ico">
+
+
 <meta charset="UTF-8">
 <title>上传视频结果</title>
+<style>
+	.courseName {
+		font-size: 30px;
+		font-weight: 700;
+	}
+	.introduce {
+		font-size: 20px;
+		padding: 0 255px;
+		line-height: 40px;
+    	text-indent: 40px;
+	}
+</style>
 </head>
 <body>
-    <div class="form-actions form-group">
-				<div id="courseName"><i class="halflings-icon edit"></i><span class="break"></span></div>
+	<div class="form-actions form-group">
+		<div id="courseName" class="courseName">
+			<i class="halflings-icon edit"></i><span class="break"></span>
+		</div>
 	</div>
 	<!--<video id="video" width="320" height="240" controls="controls" autoplay="autoplay">播放失败</video>-->
 	<div>
-	<br/>
-	<br/>
-	<video id="video-active" class="video-active" width="100%" height="600" controls="controls" autoplay="autoplay">
-	</video>
-	<div id="introduce"></div>
+		<br /> <br />
+		<!-- 视频播放显示区域 -->
+		<div class="">
+			<div class="container">
+				<div class="jumbotron">
+					<video id="video-active" class="video-active" width="100%"
+						height="600" controls="controls" autoplay="autoplay">
+					</video>
+				</div>
+			</div>
+		</div>
+	<div id="introduce" class="introduce"></div>
 	</div>
 	<!--<div id="current">当前时长：0:00</div>
 	<div id="duration">总时长：0:00</div>
@@ -58,8 +86,10 @@
 	<script src="../../assest/js/jquery.ui.touch-punch.js"></script>
 	<script src="../../assest/js/modernizr.js"></script>
 	<script src="../../assest/js/bootstrap.min.js"></script>
-	<script src="../../assest/bootstrap/bootstrap-validator/js/bootstrapValidator.min.js"></script>
-	<script src="../../assest/bootstrap/bootstrap-select/js/bootstrap-multiselect.js"></script>
+	<script
+		src="../../assest/bootstrap/bootstrap-validator/js/bootstrapValidator.min.js"></script>
+	<script
+		src="../../assest/bootstrap/bootstrap-select/js/bootstrap-multiselect.js"></script>
 	<script src="../../assest/js/jquery.cookie.js"></script>
 	<script src='../../assest/js/fullcalendar.min.js'></script>
 	<script src='../../assest/js/jquery.dataTables.min.js'></script>
@@ -83,12 +113,17 @@
 	<script src="../../assest/js/counter.js"></script>
 	<script src="../../assest/js/retina.js"></script>
 	<!-- jquery file upload相关js -->
-	<script src="../../assest/js/jquery-fileupload/vendor/jquery.ui.widget.js"></script>
-	<script src="../../assest/js/jquery-fileupload/jquery.iframe-transport.js"></script>
+	<script
+		src="../../assest/js/jquery-fileupload/vendor/jquery.ui.widget.js"></script>
+	<script
+		src="../../assest/js/jquery-fileupload/jquery.iframe-transport.js"></script>
 	<script src="../../assest/js/jquery-fileupload/jquery.fileupload.js"></script>
-	<script src="../../assest/js/jquery-fileupload/cors/jquery.xdr-transport.js"></script>
-	<script src="../../assest/js/jquery-fileupload/jquery.fileupload-process.js"></script>
-	<script src="../../assest/js/jquery-fileupload/jquery.fileupload-validate.js"></script>
+	<script
+		src="../../assest/js/jquery-fileupload/cors/jquery.xdr-transport.js"></script>
+	<script
+		src="../../assest/js/jquery-fileupload/jquery.fileupload-process.js"></script>
+	<script
+		src="../../assest/js/jquery-fileupload/jquery.fileupload-validate.js"></script>
 	<script type="text/javascript" src="../../assest/bootstrap/qiao.js"></script>
 	<script type="text/javascript" src="../../js/util/main.js"></script>
 	<script type="text/javascript" src="../../js/util/handlebars-v4.0.5.js"></script>
