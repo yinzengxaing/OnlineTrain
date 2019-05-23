@@ -104,6 +104,13 @@ public class CourseManageServiceImpl implements CourseManageService {
 		}
 		outputObject.setBeans(beans);
 	}
+	//提交试卷
+	@Override
+	public void submitTest(InputObject inputObject, OutputObject outputObject) throws Exception {
+		Map<String,Object> params = inputObject.getParams();
+		System.out.println(params);
+		
+	}
 	
 
 }

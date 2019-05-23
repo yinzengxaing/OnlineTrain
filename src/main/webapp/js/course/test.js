@@ -56,19 +56,28 @@ function dataInit(){
 function eventInit(){
 	resetTime(time);
 	$('#saveMenu').click(function () {       
-        var include = 'numb:'+numb+',';
+        var include = 'test:'+numb+',';
         for(var i = 0; i < 20; i++){
         	var sumnumb = i+numb;
         	var valnumb=$('input:radio[name="'+sumnumb+'"]:checked').val();
         	if(i!=19){
-        	  include = include + sumnumb+':'+valnumb+',';
+        	  include = include + 'test' + sumnumb+':'+valnumb+',';
         	}
         	else{
-        		include = include + sumnumb+':'+valnumb;
+        		include = include + 'test' + sumnumb+':'+valnumb;
         	}
         }
         var params = '{'+include+'}';
         console.log(params);
+        AjaxPostUtil.request({url:path+"/post/CourseManageController/submitTest",params:params,type:'json',callback:function(json){
+			if(json.returnCode == 0){
+				
+			}else{
+				qiao.bs.msg({msg:json.returnMessage,type:'danger'});
+			}
+		}
+		});
+        
     })
 
 }

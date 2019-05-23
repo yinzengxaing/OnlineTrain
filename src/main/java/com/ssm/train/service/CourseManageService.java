@@ -20,4 +20,6 @@ public interface CourseManageService {
 	public void selectCourseForTest(InputObject inputObject, OutputObject outputObject) throws Exception;
 	//获取试卷
 	public void selectTestList(InputObject inputObject, OutputObject outputObject) throws Exception;
+	//提交试卷
+	public void submitTest(InputObject inputObject, OutputObject outputObject) throws Exception;
 }

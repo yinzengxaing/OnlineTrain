@@ -73,6 +73,13 @@ public class CourseManageController {
 		public void selectTestList(InputObject inputObject,OutputObject outputObject) throws Exception {
 			courseManageService.selectTestList(inputObject, outputObject);
 		}
+		
+		//提交试卷
+		@RequestMapping( "/post/CourseManageController/submitTest")
+		@ResponseBody
+		public void submitTest(InputObject inputObject,OutputObject outputObject) throws Exception {
+			courseManageService.submitTest(inputObject, outputObject);
+		}
 	
 	
 }

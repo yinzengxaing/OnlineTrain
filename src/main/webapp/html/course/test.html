@@ -26,17 +26,42 @@
 	
 <meta charset="UTF-8">
 <title>考试</title>
+<style>
+	.testButton {
+		    padding: 19px 450px 20px;
+   			margin: 20px -10px -30px -10px;
+    		background-color: #eee;
+    		border-top: 1px solid #eee;
+	}
+	.timeClock {
+		    padding: 1px 50px 2px 780px;
+            margin: 20px -10px -30px -10px;
+            background-color: #eee;
+            border-top: 1px solid #eee;
+            font-size: 14px;
+            color: turquoise;
+	}
+	.courseName {
+		    padding: 1px 400px 2px;
+    		margin: 50px -10px -30px -10px;
+    		font-size: xx-large;
+    		color: slategrey;
+	}
+	
+</style>
 </head>
 <body onunload="goodbye()">
-	<div id="CountMsg" class="HotDate"> 
+    <div class="timeClock">
 	<span>距考试结束还有：</span> 
 	<span id="t_h">00时</span> 
 	<span id="t_m">00分</span> 
 	<span id="t_s">00秒</span> 
     </div>
+    <div class="courseName">
     <div id="courseName"></div> 
+    </div>
     <div id="testList"></div>
-    <div class="form-actions form-group">
+    <div class="testButton">
 	<button type="submit" id="saveMenu" class="btn btn-primary">提交试卷</button>
 	</div>
 	<br/>
