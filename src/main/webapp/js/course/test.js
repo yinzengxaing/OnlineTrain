@@ -55,20 +55,36 @@ function dataInit(){
 
 function eventInit(){
 	resetTime(time);
-	$('#saveMenu').click(function () {       
-        var include = 'test:'+numb+',';
-        for(var i = 0; i < 20; i++){
-        	var sumnumb = i+numb;
-        	var valnumb=$('input:radio[name="'+sumnumb+'"]:checked').val();
-        	if(i!=19){
-        	  include = include + 'test' + sumnumb+':'+valnumb+',';
+	$('#saveMenu').click(function () {  
+		
+		
+        var result = "";
+        var flag =0;
+        var s = undefined;
+        $("ol").each(function(){
+        	var id = $(this).attr("id");
+        	var valnumb =$('input:radio[name="'+id+'"]:checked').val();
+       	if( valnumb != s){
+       		result =result+id+"-"+valnumb+"===="
+        	}else{
+        		flag = 1;
+        		qiao.bs.msg({msg:"您还有题目没有完成",type:'danger'});
+        		return false ;
         	}
-        	else{
-        		include = include + 'test' + sumnumb+':'+valnumb;
-        	}
+        });
+        if (flag == 1){
+        	return ;
         }
-        var params = '{'+include+'}';
-        console.log(params);
+       // alert(result)
+      /*  for(var i = 0; i < 20; i++){
+        	var sumnumb = i+numb; //这个是题目id
+        	var valnumb=$('input:radio[name="'+sumnumb+'"]:checked').val(); //这个是题目答题人员写的答案 我这么理解没有错把
+        	  include = include +  sumnumb+':'+valnumb+',';
+        }*/
+        var params ={
+        		include	:result
+        };
+       // console.log(params);
         AjaxPostUtil.request({url:path+"/post/CourseManageController/submitTest",params:params,type:'json',callback:function(json){
 			if(json.returnCode == 0){
 				

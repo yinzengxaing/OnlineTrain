@@ -1,5 +1,7 @@
 package com.ssm.train.service.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,14 +14,13 @@ import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import com.ssm.object.InputObject;
 import com.ssm.object.OutputObject;
 import com.ssm.train.dao.CourseManageMapper;
-import com.ssm.train.dao.UserMapper;
 import com.ssm.train.service.CourseManageService;
-import com.ssm.train.service.UserService;
 
 
 @Service
 public class CourseManageServiceImpl implements CourseManageService {
 
+	private static final String String = null;
 	@Resource
 	private CourseManageMapper courseManagemapper;
     
@@ -108,7 +109,19 @@ public class CourseManageServiceImpl implements CourseManageService {
 	@Override
 	public void submitTest(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String,Object> params = inputObject.getParams();
-		System.out.println(params);
+		List<Map<String, String>> reListList = new ArrayList<>();
+		String inculdStr  =(String)params.get("include");
+		System.out.println(inculdStr);
+		String[] split = inculdStr.split("====");
+		for (String string : split) {
+			String[] split2 = string.split("-");
+
+			Map<String, String> map  = new HashMap<>();
+			map.put(split2[0], split2[1]);
+			reListList.add(map);
+		}
+		//这里输出的就是key -value 形式的id 和 答案的list
+		System.out.println(reListList);
 		
 	}
 	
