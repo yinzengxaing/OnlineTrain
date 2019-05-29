@@ -47,6 +47,18 @@
     		font-size: xx-large;
     		color: slategrey;
 	}
+	.gradeType {
+		    padding: 1px 40px 1px 320px;
+    		margin: 50px 10px 26px 10px;
+    		font-size: 50px;
+    		color: slategrey;
+	}
+	.scoreType {
+		    padding: 10px 40px 2px 350px;
+    		margin: 50px -10px -30px -10px;
+    		font-size: 80px;
+    		color: #d81537;
+	}
 	
 </style>
 </head>
@@ -69,6 +81,19 @@
 	<br/>
 	<br/>
 	<br/>
+	
+	<!-- 批量添加显示的model -->
+		<div class="modal fade" id="gradeModel" tabindex="-1" aria-labelledby="myModalLabel">
+		<div class="modal-dialog dialog-width-800" role="document">
+			<div class="modal-content">
+				<div class="modal-body dialog-body">
+			    		<label for="txt_departmentname" class="gradeType" >得  分</label>		 
+			    			<font id="grade" class="scoreType"></font>
+				</div>
+			</div>
+	 	</div>
+	</div>
+	
 	<script id="testId" type="text/x-handlebars-template"> 
     {{#each rows}}
      <ol name="test" id="{{id}}">

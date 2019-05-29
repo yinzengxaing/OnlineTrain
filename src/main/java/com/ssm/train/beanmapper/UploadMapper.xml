@@ -107,7 +107,7 @@
 		examid
 		)
 		VALUES
-		(#{include}, #{option1}, #{option2}, #{option3}, #{option3},#{answer},#{examid})
+		(#{include}, #{option1}, #{option2}, #{option3}, #{option4},#{answer},#{examid})
 	</insert>
 	
 	<!--按id查找考试信息-->

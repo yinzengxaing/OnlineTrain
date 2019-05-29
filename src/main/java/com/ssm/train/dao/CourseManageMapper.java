@@ -27,5 +27,6 @@ public interface CourseManageMapper {
 	public Map<String, Object> selectCourseForTest(Map<String,Object> map) throws Exception;
 	//获取试卷
 	public List<Map<String, Object>> selectTestList(Map<String, Object> map) throws Exception;
-	
+	//更新考试成绩
+	public void updateGrade(Map<String, Object> map) throws Exception;
 }

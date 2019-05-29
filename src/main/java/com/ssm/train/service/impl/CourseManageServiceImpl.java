@@ -110,19 +110,34 @@ public class CourseManageServiceImpl implements CourseManageService {
 	public void submitTest(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String,Object> params = inputObject.getParams();
 		List<Map<String, String>> reListList = new ArrayList<>();
+		int courseId = Integer.parseInt(params.get("id").toString());
 		String inculdStr  =(String)params.get("include");
 		System.out.println(inculdStr);
 		String[] split = inculdStr.split("====");
+		Map<String, String> map  = new HashMap<>();
 		for (String string : split) {
 			String[] split2 = string.split("-");
-
-			Map<String, String> map  = new HashMap<>();
 			map.put(split2[0], split2[1]);
-			reListList.add(map);
 		}
-		//这里输出的就是key -value 形式的id 和 答案的list
-		System.out.println(reListList);
+		Map<String, Object> bean = new HashMap<>();
+		bean.put("id", courseId);
+		List<Map<String,Object>> beans = courseManagemapper.selectTestList(bean);
+		int sumcount=0;
+		for(int i=0;i<beans.size();i++){
+			String trueAnswer = beans.get(i).get("answer").toString();
+			if(trueAnswer.equals(map.get(beans.get(i).get("id").toString()))){
+				sumcount++;
+			}
+		}
 		
+		Map<String, Object> courseMessage = courseManagemapper.selectCourseForTest(bean);
+		int grade = sumcount*Integer.parseInt(courseMessage.get("score").toString());
+		Map<String,Object> grademap = new HashMap<>();
+		grademap.put("grade", grade);
+		outputObject.setBean(grademap);
+		grademap.put("cid", params.get("id"));
+		grademap.put("userid", params.get("userid"));
+		courseManagemapper.updateGrade(grademap);
 	}
 	
 

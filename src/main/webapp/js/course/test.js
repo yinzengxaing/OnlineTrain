@@ -62,7 +62,7 @@ function eventInit(){
         var flag =0;
         var s = undefined;
         $("ol").each(function(){
-        	var id = $(this).attr("id");
+        	var id =$(this).attr("id");
         	var valnumb =$('input:radio[name="'+id+'"]:checked').val();
        	if( valnumb != s){
        		result =result+id+"-"+valnumb+"===="
@@ -82,12 +82,16 @@ function eventInit(){
         	  include = include +  sumnumb+':'+valnumb+',';
         }*/
         var params ={
-        		include	:result
+        		numb:numb,
+        		include	:result,
+        		id:courseId,
+        		userid:userid
         };
        // console.log(params);
         AjaxPostUtil.request({url:path+"/post/CourseManageController/submitTest",params:params,type:'json',callback:function(json){
 			if(json.returnCode == 0){
-				
+				$('#gradeModel').modal('show');
+				$('#grade').html(json.bean.grade);
 			}else{
 				qiao.bs.msg({msg:json.returnMessage,type:'danger'});
 			}

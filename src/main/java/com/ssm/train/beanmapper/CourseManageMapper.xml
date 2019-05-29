@@ -105,4 +105,13 @@
     WHERE
     test.examid=exam.id AND exam.courseId=#{id}
 </select>
+<!-- 更新考试成绩 -->
+<update id="updateGrade"  parameterType="java.util.Map">
+      UPDATE train 
+      set
+		grade=#{grade},
+		finishtest=1;
+	  WHERE
+	    cid=#{cid} AND userid=#{userid}
+</update>
 </mapper>
