@@ -19,10 +19,6 @@
 			<mvc:mapping path="/post/**" /> <!-- 表示拦截所有的url包括子url路径>>拦截ajax请求 -->
 			<bean class="com.ssm.interceptor.HandlerInterceptorMain" />
 		</mvc:interceptor>
-		<mvc:interceptor>
-			<mvc:mapping path="/gateway/**" /> <!-- 表示拦截所有的url包括子url路径>>拦截ajax请求 -->
-			<bean class="com.ssm.interceptor.HandlerInterceptorGateway" />
-		</mvc:interceptor>
 	</mvc:interceptors>
 
 	<mvc:annotation-driven />

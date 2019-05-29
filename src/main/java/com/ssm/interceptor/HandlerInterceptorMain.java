@@ -19,8 +19,7 @@ import com.ssm.train.util.JudgeUtil;
 
 public class HandlerInterceptorMain implements HandlerInterceptor{
 	
-	
-	private static final String[] URL = {""};
+	private static final String[] URL = {"/OnlineTrain/post/LoginController/loginByUserid"};
 	
 	private static final String[] OTHER_MAIN_URL = {""};
 
@@ -30,26 +29,30 @@ public class HandlerInterceptorMain implements HandlerInterceptor{
 	@Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
     	new PutObject(request,response);
-    	boolean passNo = false;
+    	//boolean passNo = false;
     	HttpServletRequest servletRequest = (HttpServletRequest) request;
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		String url = servletRequest.getContextPath() + servletRequest.getServletPath();
 		Map<String,Object> user = InputObject.getLogInParams();
+/*		System.out.println(user);
+		System.out.println(url);*/
+		
 		if (user == null && !JudgeUtil.contains(URL,url)) {
-			/*throw new CustomException("错误提示:您还未登录,请先登录<br/>错误类型:Session为空");*/
+			//throw new CustomException("错误提示:您还未登录,请先登录<br/>错误类型:Session为空");
 			return true;
 		}
 		if(user == null){
 			if (request.getHeader("x-requested-with") != null && request.getHeader("x-requested-with").equalsIgnoreCase("XMLHttpRequest")){
 	        	//如果是ajax请求响应头会有x-requested-with
+				System.out.println("ajax请求被执行了");
 	    		return true;
 	        }else{
-	            //非ajax请求时
+	        	System.out.println("非ajax请求被执行了");
 	        	return true;
 	        }
 		}else{
-			List<Map<String,Object>> beans = InputObject.getLogPermissionInParams();
+/*			List<Map<String,Object>> beans = InputObject.getLogPermissionInParams();
 			if(beans.isEmpty()||beans==null){
 				throw new CustomException("错误提示:该角色不具备权限或角色未上线<br/>"+url+"错误类型:权限错误");
 			}
@@ -72,7 +75,8 @@ public class HandlerInterceptorMain implements HandlerInterceptor{
 		        }
 			}else{
 				throw new CustomException("错误提示:您不具备该权限<br/>"+url+"错误类型:权限错误");
-			}
+			}*/
+			return true;
 		}
     }
 

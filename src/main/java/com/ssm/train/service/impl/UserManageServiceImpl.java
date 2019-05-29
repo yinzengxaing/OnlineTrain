@@ -158,6 +158,9 @@ public class UserManageServiceImpl implements UserManageService {
 	//按id查找用户
 	@Override
 	public void selectUserById(InputObject inputObject, OutputObject outputObject) throws Exception {
+		
+		Map<String, Object> logParams = inputObject.getLogParams();
+		System.out.println("用户进入获取用户信息"+logParams);
 		Map<String,Object> params = inputObject.getParams();
 		Map<String,Object> bean = userManageMapper.selectUserById(params);
 		outputObject.setBean(bean);
